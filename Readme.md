@@ -256,7 +256,7 @@ function generateHelloArray(n) {
 
 The input n can also be an interger, not just an array.
 
-Here we are creating an array inside the function and the lenght of the array is same as n so the space compexity of this is O(n).
+Here we are creating an array inside the function and the length of the array is same as n so the space compexity of this is O(n).
 
 ### Cheat sheet
 
