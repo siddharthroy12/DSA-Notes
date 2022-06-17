@@ -7,9 +7,20 @@ Contributions are welcomed.
 ## Table of Contents
 1. [Big O](#big-o)
     1. [How to calculate Big O](#how-to-calculate-big-o)
-    2. [Space Complexity](#space-complexcity)
-    3. [Big O Cheat Sheet](#big-o-cheat-sheet)
+    2. [Space Complexity](#space-complexity)
+    3. [Big O Cheat Sheet](#cheat-sheet)
 2. [Data Structures](#data-structures)
+    1. [Arrays](#array)
+    2. [Hash Tables](#hash-tables)
+    3. [Linked List](#linked-list)
+    4. [Stacks and Queues](#queues)
+    5. [Trees](#trees)
+    6. [Graphs](#graphs)
+3. [Algorithms](#algorithms)
+    1. [Sorting](#sorting)
+    2. [BFS and DFS](#bfs-and-dfs)
+    3. [Dynamic Programming](#dynamic-programming)
+4. [Coding Problems](#coding-problems)
 
 ## Big O
 
@@ -197,7 +208,53 @@ When calculate Big O we are concerned about the scalibility of the function and 
 
 ### Space complexity
 
-Comming soon
+Big O is not only used to calculate time compexity it also used to calculate memory usage.
+
+And there is relation between time and memory usage in computers.
+
+If an algorithm uses less time then It will have to use more memory, If an algorithm uses less memory then it will take more time to perform.
+
+You cannot have the best of both worlds.
+
+If you are writing a software that runs on low-end systems (like mico conrollers) you wanna sacrifice speed for low memory usage.
+
+And If you are writing a software that runs on a high-end system with lots of data to process you wanna sacrifice memory usage for speed.
+
+Let's look at an example to learn how to calculate space complexity:
+
+```js
+function sumOfFirstTheeElements(array) {
+    let res = 0;    //  -- O(1)
+
+    for (let i = 0; i < 3; i++) {   // -- O(1)
+        res += array[i];
+    }
+
+    return res;
+}
+```
+
+When we calculate space compexity we do not inlcude the space occupied by the inputs.
+
+Inside our function we are only creating two variables and it does not grow as the input grows so it's constant O(1).
+
+Let's look at another example:
+
+```js
+function generateHelloArray(n) {
+    let res = [];
+
+    for (let i = 0; i < n; i++) {
+        res.push("Hello");
+    }
+
+    return res;
+}
+```
+
+The input n can also be an interger, not just an array.
+
+Here we are creating an array inside the function and the lenght of the array is same as n so the space compexity of this is O(n).
 
 ### Cheat sheet
 
@@ -225,6 +282,13 @@ Comming soon
 - Iterating through half a collection is still O(n)
 - Drop Non-dominant terms
     - O(n + n^2) => O(n^2)
+
+#### What Causes Time Complexity?
+
+- Operations (+, -, *, /)
+- Comparisons (<, >, ==)
+- Looping (for, while)
+- Outside Function call (function())
 
 #### What Causes Space Complexity?
 - Variables
