@@ -10,16 +10,18 @@ Contributions are welcomed.
     2. [Space Complexity](#space-complexity)
     3. [Big O Cheat Sheet](#cheat-sheet)
 2. [Data Structures](#data-structures)
-    1. [Arrays](#array)
-    2. [Hash Tables](#hash-tables)
-    3. [Linked List](#linked-list)
-    4. [Stacks and Queues](#queues)
-    5. [Trees](#trees)
-    6. [Graphs](#graphs)
+    1. [Operations on Data Structures](#operations-on-data-structures)
+    2. [Arrays](#array)
+    3. [Hash Tables](#hash-tables)
+    4. [Linked List](#linked-list)
+    5. [Stacks and Queues](#queues)
+    6. [Trees](#trees)
+    7. [Graphs](#graphs)
 3. [Algorithms](#algorithms)
-    1. [Sorting](#sorting)
-    2. [BFS and DFS](#bfs-and-dfs)
-    3. [Dynamic Programming](#dynamic-programming)
+    1. [Recursion](#recursion)
+    2. [Sorting](#sorting)
+    3. [BFS and DFS](#bfs-and-dfs)
+    4. [Dynamic Programming](#dynamic-programming)
 4. [Coding Problems](#coding-problems)
 
 ## Big O
@@ -269,6 +271,7 @@ Here we are creating an array inside the function and the lenght of the array is
 **O(n!)** Factorial - you are adding a loop for every element
 
 #### Rules
+
 - Always worst case
 - Remove constants
     - O(n*2) => O(n)
@@ -291,7 +294,47 @@ Here we are creating an array inside the function and the lenght of the array is
 - Outside Function call (function())
 
 #### What Causes Space Complexity?
+
 - Variables
 - Data Structures
 - Function Call
 - Allocations
+
+## Data Structures
+
+To write an efficent software it's important to learn how to use these different types of data structures and how they can improve the efficency of your program.
+
+### Operations on Data Structures
+
+Data structures are simply ways to organise data on our computers and each data structures have their tradeoffs, some are good at certain operations and other are good at other operations.
+
+The operations we are talking about are:
+- Insertion: Adding more data
+- Deletion: Deleting a data
+- Traversal: Looping through all the data
+- Searching: Searching for a data
+- Sorting: Sorting all the data
+- Access: Accessing a data
+
+Here is a cheat sheet on operations for all data structures:
+![Cheat Sheet on operation for all data structures](./Operations-Table.png)
+
+### Array
+
+The most basic and commonly used data structure. Elements of array are placed next to each other in memory mapped with index starting at 0.
+
+This makes the access time O(1) if we know the index of our data. But if you want to seach for a data you need to loop over every element one by one which makes the searching time O(n).
+
+To calculate the length of the array we don't need to loop over the entire array, we can just store the length of the array inside a variable/property when we create the array (like in JS `array.length`) and increase/decrease this value whenever we add or remove an element in the array.
+
+And most languages provides this length property so the access time of the last element of the array is also O(1).
+
+But adding and removing and element is different story.
+
+Many languages provides two methods for array `push` and `pop` to insert and remove and element at the end of the array.
+
+`push` and `pop` have O(1) time compexity.
+
+But if you want to add or remove and element anywhere else in the array the elements after the index you just changed will have to re-order so in the worst case scenario the time complexity of inserting and removing an element is O(n)
+
+And strings are also an array of characters so the same applies for strings too.
