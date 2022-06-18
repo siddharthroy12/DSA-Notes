@@ -438,3 +438,39 @@ function mergeSortedArray(array1, array2) {
 ```
 
 Both the time and space complexity of this algorithm is O(a+b).
+
+### Hash Tables
+
+Map(C++), HashMap, Dictionary(Python), Object(JavaScript), and HashTable are some of the ways to call this data structure and different languages have slight variations of hash tables.
+
+Hash tables are very important all across computer science.
+
+Hash tables allow us to store data in a key-value pair and this key is mostly a string or a number(we can use almost any type of data as key).
+
+![HashTable Table](./HashTable.png)
+
+In hash tables we use key to find the value in memory, unlike arrays in hash tables data is not stored in sequencial way but still the access time of hash tables is O(1), it's constant.
+
+Hash tables uses one-way hashing algorithm where the key is the input and the output is the address in memory and this implementation of this hashing algorithm is different in all languages.
+
+![Hash Function Example](./HashFunction.png)
+
+#### Hash Function
+
+Hash Function is again something that is used all across computer science. A Hash Function is simply a function that generates a fixed-length string that looks like some random gibberish for any given input. The output is called Hash.
+
+Eg. ```5d41402abc4b2a76b9719d911017c592```
+
+You can play around with a famous hash function MD5 on [this website](http://www.md5.cz/).
+
+There are some key aspects of hash functions:
+
+- The function is a one-way function. Meaning there is no way to know what the input was by looking at the output.
+- For the same input the output is always going to be the same
+- If the input changes even by one bit, it's going to completely change the output
+
+In hash tables, the hash function returns a memory address for a given input. This makes accessing a block of memory by a key O(1) time.
+
+This is extremely useful because now we can map data to a string(name, etc) instead of a number like in an array.
+
+The hash function takes some time to calculate the output and it can slow down accessing data using HashTable. That's why in most languages the HashTable is implemented by the most efficient hash function.
