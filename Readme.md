@@ -2,9 +2,12 @@
 
 I'm making my detailed notes here as I'm re-learning DSA. This can be useful to you even if you don't have any knowledge of DSA.
 
+> **NOTE:** This is in work in process
+
 Contributions are welcomed.
 
 ## Table of Contents
+
 1. [Big O](#big-o)
     1. [How to calculate Big O](#how-to-calculate-big-o)
     2. [Space Complexity](#space-complexity)
