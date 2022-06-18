@@ -31,13 +31,13 @@ Contributions are welcomed.
 
 The Big O notation is used to show how well an algorithm scales in terms of speed and space as the input grows.
 
-It indicates how much time and memory an algorithm will take to solve an problem for a given input.
+It indicates how much time and memory an algorithm will take to solve a problem for a given input.
 
-Because a code can run faster or slower on different processors it's not a good way to calculate the efficency of a program. 
+Because a code can run faster or slower on different processors it's not a good way to calculate the efficiency of a program. 
 
 That's why we use Big O notation to show how well a code performs when the input grows.
 
-Big O can also be plotted to a graph:
+Big O can also be plotted on a graph:
 
 ![Big O Graph](./Big-O-Graph.png)
 
@@ -71,12 +71,11 @@ function sumOfFirstTheeElements(array) {
 
 You might think the Big O of this function is O(5) because there are five operations in this code.
 
-Which is correct but as the input grows the number of operations stays the same, it does not grow.
+This is correct but as the input grows the number of operations stays the same, it does not grow.
 
-So it's a linear time which when denote as O(1).
+So it's a linear time which when denoted as O(1).
 
-
-Let's look at a code where numeber of operation grows as the input:
+Let's look at a code where the numeber of operations grows as the input:
 
 ```js
 function getIndexOf(array, element) {
@@ -88,13 +87,13 @@ function getIndexOf(array, element) {
 }
 ```
 
-This code will find the index of an element in a array by looping over each element.
+This code will find the index of an element in an array by looping over each element.
 
-So in the best case if the element is at the first index it will only do one operation O(1) but in the worst case the number of operations will be equal to the number of inputs which it denoted by O(n).
+So in the best case if the element is at the first index it will only do one operation O(1) but in the worst case, the number of operations will be equal to the number of inputs which is denoted by O(n).
 
-When we calculate the Big O we are always take the worst case so the Big O of this code is O(n).
+When we calculate the Big O we always take the worst case so the Big O of this code is O(n).
 
-Let's look at a another similar example:
+Let's look at another similar example:
 
 ```js
 function getIndexOfArrayAndSumOfFirstThree(array, element) {
@@ -118,9 +117,9 @@ function getIndexOfArrayAndSumOfFirstThree(array, element) {
 
 Here we have a function that does two things:
     - Get the index of an element
-    - Get the sum of first three element
+    - Get the sum of the first three elements
 
-You might think that the Big O of this function is O(n) + O(3) = O(n+3). But we don't count the constant numbers like 3 because if the number of elements is 1000 then having extra 3 operation doesn't matter to us, so we remove the constant and this becomes O(n).
+You might think that the Big O of this function is O(n) + O(3) = O(n+3). But we don't count the constant numbers like 3 because if the number of elements is 1000 then having an extra 3 operation doesn't matter to us, so we remove the constant and this becomes O(n).
 
 > In big tech we often work with big amount of data
 
@@ -148,7 +147,7 @@ We have to O(n) here so it should become O(2n) right?
 
 Even though the graph of this is steeper than O(n) it's still a straight line (a linear graph), so once again we remove the constant and it becomes O(n).
 
-For two separate collection:
+For two separate collections:
 
 ```js
 function getSumOfTwoArray(array1, array2) {
@@ -167,8 +166,7 @@ function getSumOfTwoArray(array1, array2) {
 }
 ```
 
-People often confuse this as O(n) but this is incorrect. Because we have two inputs we need show two variables in the notation. So this is O(a+b).
-
+People often confuse this as O(n) but this is incorrect. Because we have two inputs we need to show two variables in the notation. So this is O(a+b).
 
 For nested loops:
 ```js
@@ -185,7 +183,7 @@ function getPairsOfElements(array) {
 }
 ```
 
-For nested loops like this we just multiply the operations, so this becomes O(n*n) = O(n^2).
+For nested loops like this, we just multiply the operations, so this becomes O(n*n) = O(n^2).
 
 And the last rule:
 Drop Non-dominant terms
@@ -207,9 +205,9 @@ function getSumAndPairs(array) {
 }
 ```
 
-This looks like it has complexity of O(n + n^2) but because n^2 is way more important than n because it grows much faster than n.
+This looks like it has the complexity of O(n + n^2) but because n^2 is way more important than n because it grows much faster than n.
 
-When calculate Big O we are concerned about the scalibility of the function and not the accurate speed of the function.
+When we calculate Big O we are concerned about the scalability of the function and not the accurate speed of the function.
 
 ### Space complexity
 
@@ -239,9 +237,9 @@ function sumOfFirstTheeElements(array) {
 }
 ```
 
-When we calculate space compexity we do not inlcude the space occupied by the inputs.
+When we calculate space complexity we do not include the space occupied by the inputs.
 
-Inside our function we are only creating two variables and it does not grow as the input grows so it's constant O(1).
+Inside our function, we are only creating two variables and it does not grow as the input grows so it's constant O(1).
 
 Let's look at another example:
 
@@ -257,9 +255,9 @@ function generateHelloArray(n) {
 }
 ```
 
-The input n can also be an interger, not just an array.
+The input n can also be an integer, not just an array.
 
-Here we are creating an array inside the function and the length of the array is same as n so the space compexity of this is O(n).
+Here we are creating an array inside the function and the length of the array is the same as n so the space complexity of this is O(n).
 
 ### Cheat sheet
 
@@ -311,7 +309,7 @@ Here we are creating an array inside the function and the length of the array is
 
 ## Data Structures
 
-To write an efficent software it's important to learn how to use these different types of data structures and how they can improve the efficency of your program.
+To write an efficient software it's important to learn how to use these different types of data structures and how they can improve the efficiency of your program.
 
 ### Operations on Data Structures
 
@@ -330,29 +328,29 @@ Here is a cheat sheet on operations for all data structures:
 
 ### Array
 
-The most basic and commonly used data structure. Elements of array are placed next to each other in memory mapped with index starting at 0.
+The most basic and commonly used data structure. Elements of an array are placed next to each other in memory, mapped with numbers starting at 0.
 
-This makes the access time O(1) if we know the index of our data. But if you want to seach for a data you need to loop over every element one by one which makes the searching time O(n).
+This makes the access time O(1) if we know the index of our data. But if you want to search for a data you need to loop over every element one by one which makes the searching time O(n).
 
 To calculate the length of the array we don't need to loop over the entire array, we can just store the length of the array inside a variable/property when we create the array (like in JS `array.length`) and increase/decrease this value whenever we add or remove an element in the array.
 
-And most languages provides this length property so the access time of the last element of the array is also O(1).
+And most languages provide this length property so the access time of the last element of the array is also O(1).
 
-But adding and removing and element is different story.
+But adding and removing an element is a different story.
 
-Many languages provides two methods for array `push` and `pop` to insert and remove and element at the end of the array.
+Many languages provide two methods for array `push` and `pop` to insert and remove an element at the end of the array.
 
-`push` and `pop` have O(1) time compexity.
+`push` and `pop` have O(1) time complexity.
 
-But if you want to add or remove and element anywhere else in the array the elements after the index you just changed will have to re-order so in the worst case scenario the time complexity of inserting and removing an element is O(n)
+But if you want to add or remove an element anywhere else in the array the elements after the index you just changed will have to re-order so in the worst-case scenario the time complexity of inserting and removing an element is O(n)
 
-And strings are also an array of characters so the same applies for strings too.
+And strings are also an array of characters so the same applies to strings too.
 
 #### Reversing an array
 
-Most programming languages provides a built-in method for reversing an array but let's look at the ways we can implement this.
+Most programming languages provide a built-in method for reversing an array but let's look at the ways we can implement this.
 
-Fist the most simple way to reverse an array:
+First, the most simple way to reverse an array:
 
 ```js
 function reverse(input) {
@@ -366,7 +364,7 @@ function reverse(input) {
 }
 ```
 
-It loops through the array in reverse order and push the value in a new array.
+It loops through the array in reverse order and pushes the value into a new array.
 
 The time and space complexity of this code is O(n), but we can improve this.
 
@@ -385,27 +383,27 @@ function reverse(input) {
 }
 ```
 
-In this function we are using two index that point to the opposite sides of the array and swap the values of the indexs as they move towards the center.
+In this function, we are using two indexes that point to the opposite sides of the array and swap the values of the indexes as they move towards the center.
 
-This above function has space complexity of O(1) because it creates constant amount of space and mutate the input value instead.
+The above function has a space complexity of O(1) because it creates a constant amount of space and mutates the input value instead.
 
 This still has the time complexity of O(n) if you are confused.
 
-Now this function is an un-pure function because it is mutating the input value which is not always an option so that's why the previous solution was not that bad for reversing an array.
+Now, this function is a un-pure function because it is mutating the input value which is not always an option so that's why the previous solution was not that bad for reversing an array.
 
 #### Merging sorted array
 
 Let's solve a more complex interview question.
 
-Given two sorted array, can you merge them into a one array that is sorted.
+Given two sorted arrays, merge them into one sorted array.
 
 For example: `[0,4,6]` and `[2,3,7]` should become `[0,2,3,4,6,7]`
 
-To solve this problem we need to store two index. [1] One will point to the first element of first array and the other one will point to the first element of second array.
+To solve this problem we need to store two indexes. [1] One will point to the first element of the first array and the other one will point to the first element of the second array.
 
 [2] Then compare the two values and increase the index pointing to the shorter value and push the shorter value to the result array.
 
-Keep doing this until one of the index hit the end [3] then add the remaining elements the the result array.
+Keep doing this until one of the indexes hit the end [3] then add the remaining elements to the result array.
 
 ```js
 function mergeSortedArray(array1, array2) {
@@ -439,4 +437,4 @@ function mergeSortedArray(array1, array2) {
 }
 ```
 
-The both time and space compexity of this algorithm is O(a+b).
+Both the time and space complexity of this algorithm is O(a+b).
