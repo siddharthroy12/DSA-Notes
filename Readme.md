@@ -266,11 +266,17 @@ Here we are creating an array inside the function and the length of the array is
 #### The most common Big Os
 
 **O(1)** Constant - no loops
+
 **O(log N)** Logarithmic - usually searching algorithms have log n if they are sorted (Binary Search)
+
 **O(n)** Linear - for loops, while loops through n items
+
 **O(n log(n))** Log Linear - usually sorting operations
+
 **O(n^2)** Quadratic - every element in a collection needs to be compared to ever other element. Two nested loops
+
 **O(2^n)** Exponential - recursive algorithms that solves a problem of size N
+
 **O(n!)** Factorial - you are adding a loop for every element
 
 #### Rules
@@ -341,3 +347,96 @@ Many languages provides two methods for array `push` and `pop` to insert and rem
 But if you want to add or remove and element anywhere else in the array the elements after the index you just changed will have to re-order so in the worst case scenario the time complexity of inserting and removing an element is O(n)
 
 And strings are also an array of characters so the same applies for strings too.
+
+#### Reversing an array
+
+Most programming languages provides a built-in method for reversing an array but let's look at the ways we can implement this.
+
+Fist the most simple way to reverse an array:
+
+```js
+function reverse(input) {
+    const output = [];
+
+    for (let i = input.length-1; i >= 0; i--) {
+        output.push(input[i]);
+    }
+
+    return output;
+}
+```
+
+It loops through the array in reverse order and push the value in a new array.
+
+The time and space complexity of this code is O(n), but we can improve this.
+
+```js
+function reverse(input) {
+    let index1 = 0;
+    let index2 = input.length-1;
+
+    while(index2 > index1) {
+        let tmp = input[index1];
+        input[index1] = input[index2];
+        input[index2] = tmp;
+        index1++;
+        index2--;
+    }
+}
+```
+
+In this function we are using two index that point to the opposite sides of the array and swap the values of the indexs as they move towards the center.
+
+This above function has space complexity of O(1) because it creates constant amount of space and mutate the input value instead.
+
+This still has the time complexity of O(n) if you are confused.
+
+Now this function is an un-pure function because it is mutating the input value which is not always an option so that's why the previous solution was not that bad for reversing an array.
+
+#### Merging sorted array
+
+Let's solve a more complex interview question.
+
+Given two sorted array, can you merge them into a one array that is sorted.
+
+For example: `[0,4,6]` and `[2,3,7]` should become `[0,2,3,4,6,7]`
+
+To solve this problem we need to store two index. [1] One will point to the first element of first array and the other one will point to the first element of second array.
+
+[2] Then compare the two values and increase the index pointing to the shorter value and push the shorter value to the result array.
+
+Keep doing this until one of the index hit the end [3] then add the remaining elements the the result array.
+
+```js
+function mergeSortedArray(array1, array2) {
+    // [1]
+    let index1 = 0;
+    let index2 = 0;
+    let result = [];
+
+    // [2]
+    while(index1 < array1.length && index2 < array2.length) {
+        if (array1[index1] < array2[index2]) {
+            result.push(array1[index1]);
+            index1++;
+        } else {
+            result.push(array2[index2]);
+            index2++;
+        }
+    }
+
+    // [3]
+    while(index1 < array1.length) {
+        result.push(array1[index1]);
+        index1++;
+    }
+    while(index2 < array2.length) {
+        result.push(array2[index2]);
+        index2++;
+    }
+
+    return result;
+}
+```
+
+The both time and space compexity of this algorithm is O(a+b).
