@@ -561,14 +561,14 @@ is implemented by the most efficient hash function.
 
 #### Hash Collisions
 
-Hash Funcitions are great, they can generate a unique random string for a given input
-and two different inputs cannot produce same hash.
+Hash Functions are great, they can generate a unique random string for a given input
+and two different inputs cannot produce the same hash.
 
-But when we use hash table the range of output of hash function becomes limited.
-So sometimes two different output results in same address in the memory.
+But when we use a hash table the range of the output of the hash function becomes limited.
+So sometimes two different output results in the same address in the memory.
 
-To deal with that different implementation have different methods. One of which is
-Separate Chaning which uses linked list to solve this issue but it slows down the
+To deal with that different implementations have different methods. One of which is
+Separate Chaining which uses a linked list to solve this issue but it slows down the
 access time from O(1) to O(n) where n is the size of the linked list.
 
 This is how it looks like:
