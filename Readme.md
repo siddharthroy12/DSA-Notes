@@ -5,7 +5,8 @@ This can be useful to you even if you don't have any knowledge of DSA.
 
 > **Warning:** This is in work in process
 
-If you find something that I have written wrong or It could be explained in a better way please submit an issue [here](https://github.com/siddharthroy12/My-DSA-Notes/issues).
+If you find something that I have written wrong or It could be explained in a better
+way please submit an issue [here](https://github.com/siddharthroy12/My-DSA-Notes/issues).
 
 Contributions are welcomed.
 
@@ -375,7 +376,9 @@ The most basic and commonly used data structure.
 Elements of an array are placed next to each other in memory,
 mapped with numbers starting at 0.
 
-Elements of an array are stored sequentially, meaning if we have the address of the first element of an array to access the second element all we need to do is add one to the address and to access the second element add two, and so on.
+Elements of an array are stored sequentially, meaning if we have the address
+of the first element of an array to access the second element all we need
+to do is add one to the address and to access the second element add two, and so on.
 
 ![Array Diagram](./Array.png)
 
