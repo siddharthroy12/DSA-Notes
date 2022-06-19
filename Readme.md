@@ -3,7 +3,7 @@
 I'm making my detailed notes here as I'm re-learning DSA.
 This can be useful to you even if you don't have any knowledge of DSA.
 
-> **NOTE:** This is in work in process
+> **Warning:** This is in work in process
 
 Contributions are welcomed.
 
@@ -367,6 +367,10 @@ The most basic and commonly used data structure.
 Elements of an array are placed next to each other in memory,
 mapped with numbers starting at 0.
 
+Elements of an array are stored sequentially, meaning if we have the address of the first element of an array to access the second element all we need to do is add one to the address and to access the second element add two, and so on.
+
+![Array Diagram](./Array.png)
+
 This makes the access time O(1) if we know the index of our data.
 But if you want to search for a data you need to loop over every element
 one by one which makes the searching time O(n).
@@ -624,3 +628,78 @@ The time and space complexity of this is O(n).
 **Lookup** O(1).
 
 **Searching** O(1) if searching using key, otherwise O(n).
+
+### Linked List
+
+As the name suggests it's a list that's linked. The best way
+to explain this is using a diagram.
+
+![Linked List Diagram](./LinkedList.png)
+
+A linked list is a collection of nodes, each node has two
+sections. One stores the data and the other points to the next node in the list.
+
+So how does this differs from an array?
+
+In an array, all the elements are stored sequentially.
+This mean if we have the address to the first element of the array
+we can get the second element by just adding 1 to the address.
+
+But In a linked list all the nodes are stored in random places in memory.
+So the access the second node we need to use the pointer in the
+first node that is pointing to the second node and so on.
+The last node points to nothing, that how we know it's the last node.
+
+Most programming languages don't come with linked list built-in
+because nobody uses linked list in their applications.
+
+#### Why Linked List?
+
+You might be thinking if most programming languages don't come with
+linked list and nobody uses them to develop their
+application then why are we learning about this.
+
+The reason is that while linked list alone is not very useful
+in most situations it is a foundation for other very useful data structures
+like Graph and Trees so it's important to know how to linked list
+works if you want to learn about them.
+
+#### Linked List vs Array
+
+**Lookup**
+
+In an array, accessing an element by index has O(1) time complexity.
+
+But in Linked List because data is not stored in sequence in the memory
+we need to iterate through one node to another to get to the desired element.
+
+**Prepend**
+
+Adding an element at the beginning of an array has O(n) time complexity.
+
+But in Linked List it's O(1).
+
+**Append**
+
+Adding an element at the end of an array as O(1) time complexity. Same for Linked List.
+
+**Inserting/Deleting an element**
+
+In array time complexity of adding/deleting an element is O(n) in the worst case.
+
+And in the linked list it's the same.
+
+Here is a visual representation of adding an element to a Linked List:
+
+![Visual representaion of adding an element in Linked List](./AddingLinkedList.png)
+
+If we want to add a node/element to an index first we need to traverse to the index.
+
+[1]Then create a new node that will point to the node which we just found.
+
+[2]Then make the previous node point to the newly created node.
+
+#### What is a pointer?
+
+#### Implementing Linked List
+
