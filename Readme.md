@@ -5,6 +5,8 @@ This can be useful to you even if you don't have any knowledge of DSA.
 
 > **Warning:** This is in work in process
 
+If you find something that I have written wrong or It could be explained in a better way please submit an issue [here](https://github.com/siddharthroy12/My-DSA-Notes/issues).
+
 Contributions are welcomed.
 
 ## Table of Contents
@@ -26,7 +28,8 @@ Contributions are welcomed.
     2. [Sorting](#sorting)
     3. [BFS and DFS](#bfs-and-dfs)
     4. [Dynamic Programming](#dynamic-programming)
-4. [Coding Problems](#coding-problems)
+5. [How to solve coding problems](#how-to-solve-coding-problems)
+6. [Coding Problems](#coding-problems)
 
 ## Big O
 
@@ -45,6 +48,10 @@ when the input grows.
 Big O can also be plotted on a graph:
 
 ![Big O Graph](./Big-O-Graph.png)
+
+Note that even though O(n^2), O(2^n) and O(n!) are marked as horrible it's not always the case.
+
+In some cases you cannot avoid having steep time complexities, they can be the most efficient complexities for certain problems so keep that in mind.
 
 ### How to caculate Big O
 
