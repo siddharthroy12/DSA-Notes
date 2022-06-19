@@ -393,7 +393,19 @@ and removing an element is O(n)
 
 And strings are also an array of characters so the same applies to strings too.
 
-#### Reversing an array
+#### Operations On Arrays
+
+**Inserting** O(1) at the end and O(n) at the beginning.
+
+**Deleting** Same as Inserting.
+
+**Lookup** O(1).
+
+**Searching** O(n).
+
+#### Coding Problems
+
+##### Reversing an array
 
 Most programming languages provide a built-in method for reversing an array
 but let's look at the ways we can implement this.
@@ -443,13 +455,15 @@ Now, this function is a un-pure function because it is mutating the input value
 which is not always an option so that's why
 the previous solution was not that bad for reversing an array.
 
-#### Merging sorted array
+##### Merging sorted array
 
 Let's solve a more complex interview question.
 
-Given two sorted arrays, merge them into one sorted array.
+Q. Given two sorted arrays, merge them into one sorted array.
 
 For example: `[0,4,6]` and `[2,3,7]` should become `[0,2,3,4,6,7]`
+
+Answer:
 
 To solve this problem we need to store two indexes.
 [1] One will point to the first element of the first array and
@@ -544,3 +558,69 @@ instead of a number like in an array.
 The hash function takes some time to calculate the output and it can slow down
 accessing data using HashTable. That's why in most languages the HashTable
 is implemented by the most efficient hash function.
+
+#### Hash Collisions
+
+Hash Funcitions are great, they can generate a unique random string for a given input
+and two different inputs cannot produce same hash.
+
+But when we use hash table the range of output of hash function becomes limited.
+So sometimes two different output results in same address in the memory.
+
+To deal with that different implementation have different methods. One of which is
+Separate Chaning which uses linked list to solve this issue but it slows down the
+access time from O(1) to O(n) where n is the size of the linked list.
+
+This is how it looks like:
+
+![Diagram of Hash Collision](./HashCollision.png)
+
+Mostly you don't have to worry about Hash Collision happening
+but it's good to know that this happens.
+
+#### Coding Problems
+
+##### First Recurring Element
+
+Q. For a given array find the first recurring element
+
+Example: [2,5,1,2,3,5,1,2,3] => 2
+
+Answer:
+
+To solve this problem we need to loop over every element of the array
+and store the seen elements somewhere so that we can check if an element has
+been seen before.
+
+We will use hash table to store seen elments.
+
+```js
+function firstRecurringElement(input) {
+  let seen = {};
+
+  for (let i = 0; i < input.length; i++) {
+    // Check if key exists
+    if (seen[input[i]]) {
+      return input[i];
+    }
+
+    // Otherwise store the key with any value
+    seen[input[i]] = true;
+  }
+
+  // If no recurring element return false
+  return false;
+}
+```
+
+The time and space complexity of this is O(n).
+
+#### Operations on Hash Tables
+
+**Inserting** O(1).
+
+**Deleting** O(1).
+
+**Lookup** O(1).
+
+**Searching** O(1) if searching using key, otherwise O(n).
