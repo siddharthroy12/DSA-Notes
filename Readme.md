@@ -51,7 +51,8 @@ Big O can also be plotted on a graph:
 
 Note that even though O(n^2), O(2^n) and O(n!) are marked as horrible it's not always the case.
 
-In some cases you cannot avoid having steep time complexities, they can be the most efficient complexities for certain problems so keep that in mind.
+In some cases you cannot avoid having steep time complexities,
+they can be the most efficient complexities for certain problems so keep that in mind.
 
 ### How to caculate Big O
 
@@ -707,6 +708,53 @@ If we want to add a node/element to an index first we need to traverse to the in
 [2]Then make the previous node point to the newly created node.
 
 #### What is a pointer?
+
+If you know C/C++ you already know what pointers are, you can skip this section.
+
+When we create a variable and store a value in it, it occupies a space in memory
+and the location of that space has an address.
+
+And if we have an address of a location in memory we can change the value stored there.
+
+In mid-level languages like C/C++ and Rust, we have a special data type
+that allows us to store the address of a location in the memory
+in a special variable called pointers.
+
+So we can have two variables that point to the same location in memory
+
+In interpreted languages like Python and JavaScript, we do not have access
+to addresses in memory but have references.
+
+References are like pointers but they point to the actual value rather than the address.
+
+In JavaScript, if you create a variable and assign it to a different variable
+it will either copy the value or create a reference
+
+In JavaScript primitive data types `Boolean`, `null`, 
+`undefined`, `String`, and `Number` are always get copied
+
+```js
+let a = 1;
+let b = a; // Copy the value of a into b
+b++;
+
+console.log(a) // => 1
+console.log(b) // => 2
+```
+JavaScript has three data types that get passed by reference: `Array`, `Function`, `Object`
+
+```js
+let a = { value: 1 };
+let b = a;
+b.value = 10;
+
+console.log(a.value) // => 10
+console.log(b.value) // => 10
+```
+
+By using an object we have two variables that points to the same location in the memory.
+
+This is how we will make one node(a object) point to the other node(a object).
 
 #### Implementing Linked List
 
