@@ -1600,7 +1600,8 @@ The algorithm to reverse a Linked List looks like this:
 ```
 If the linked list has elements less or equal to 1 then do nothing.
 
-Else get the reference to the first and the second Node to the `first` and `second` variable and make the `first` LinkedList's last node;
+Else get the reference to the first and the second Node to the
+`first` and `second` variable and make the `first` LinkedList's last node;
 
 While the second Node exists:
   Store the reference to the `next` of the `second` variable in a `temp` variable.
@@ -1638,9 +1639,9 @@ reverse() {
 ```
 
 This is one of the most difficult concepts to understand,
-basically what we are doing is we have two pointers that point to the first and second Node of the list and as we
-loop through the list we make the second Node point to the
-first Node.
+basically what we are doing is we have two pointers that point
+to the first and second Node of the list and as we loop through the
+list we make the second Node point to the first Node.
 
-It's very hard to understand this algorithm by just reading
-so I recommend you to watch this [Youtube Video](https://www.youtube.com/watch?v=G0_I-ZF0S38).
+It's very hard to understand this algorithm by just reading so I recommend
+you to watch this [Youtube Video](https://www.youtube.com/watch?v=G0_I-ZF0S38).
