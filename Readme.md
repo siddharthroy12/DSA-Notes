@@ -1197,3 +1197,450 @@ console.log("-----------")
 test.delete(3);
 test.print();
 ```
+
+I know this isn't the most efficient implementation of Linked List because
+in the `insert` and `delete` methods I'm calling the `traverse` method twice
+which can be avoided but I think this is good enough to show how a Linked List works.
+
+#### Doubly Linked List
+
+What I just showed you is called a Singly Linked List because in it a Node only
+points to a single Node.
+
+Imagine a situation where you want to get a Node at a closer index
+to the last Node.
+
+In a Singly Linked List, you would have to traverse through the list from the
+beginning to almost the end of the list.
+
+It would be great if we can traverse from the end of the list.
+
+This is what Doubly Linked List is for. In Doubly Linked List a Node
+points to both the next and previous Node. Which allows us to traverse
+from the end of the list.
+
+![Diagram of Doubly Linked List](./DoublyLinkedList.png)
+
+Let's convert our Singly Linked List to a Doubly Linked List.
+
+Inside the `Node` class you only need to add the `previous` pointer.
+
+```js
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.previous = null;
+  }
+}
+```
+
+Inside the `LinkedList` class, there is no need to change
+anything in the constructor.
+
+Inside the 'push' method you need to add one line:
+
+```js
+push(value) {
+  if (this.lastNode) {
+    const newNode = new Node(value)
+    this.lastNode.next = newNode;
+    newNode.previous = this.lastNode; // Add this
+    this.lastNode = newNode;
+  } else {
+    this.firstNode = new Node(value);
+    this.lastNode = this.firstNode;
+  }
+
+  this.length++;
+}
+```
+
+We also need to do the same for the `unshift` method:
+
+```js
+unshift(value) {
+  const newNode = new Node(value);
+  newNode.next = this.firstNode;
+  this.firstNode = newNode;
+  this.firstNode.next.previous = this.firstNode; // Add this
+
+  this.length++;
+}
+```
+
+Let's skip the `traverse` for now, we'll come back to them later.
+
+First, let's fix the `insert` and `delete` methods.
+
+```js
+insert(index, value) {
+  const nodeAtIndex = this.traverse(index);
+  const nodeAtPreviousIndex = nodeAtIndex.previous; // Change this
+
+  if (nodeAtIndex) {
+    const newNode = new Node(value);
+    newNode.next = nodeAtIndex;
+    nodeAtIndex.previous = newNode; // Add this
+
+    if (nodeAtPreviousIndex) {
+      nodeAtPreviousIndex.next = newNode;
+      newNode.previous = nodeAtPreviousIndex; // Add this
+    }
+    
+    this.length++;
+  } else if (index === this.length) {
+    this.push(value);
+  }
+}
+```
+
+Now we also don't need to call the traverse function twice!
+
+```js
+delete(index) {
+  const nodeAtIndex = this.traverse(index);
+  const nodeAtNextIndex = nodeAtIndex.next;
+  const nodeAtPreviousIndex = nodeAtIndex.previous;
+
+  if (nodeAtPreviousIndex) {
+    nodeAtPreviousIndex.next = nodeAtNextIndex;
+    nodeAtNextIndex.previous = nodeAtPreviousIndex; // Add this
+  }
+}
+```
+
+Now to test if this works we'll add another print method that will
+traverse the list in reverse order(from the last Node to the first Node).
+
+```js
+printReverse() {
+  let currentNode = this.lastNode;
+
+  while(currentNode) {
+    console.log(currentNode.value);
+    currentNode = currentNode.previous;
+  }
+}
+```
+
+To test your code run this:
+
+```js
+let test = new LinkedList(1);
+test.push(2);
+test.push(5);
+test.push(7);
+test.unshift(10);
+test.print();
+console.log("---- Reverse ----")
+test.printReverse();
+console.log("---- Insert 11 at 3 ------")
+test.insert(3, 11);
+test.print();
+console.log("---- Reverse ----")
+test.printReverse();
+console.log("---- Delete at 3 -----")
+test.delete(3);
+test.print();
+console.log("---- Reverse ----")
+test.printReverse();
+```
+
+The output should look like this:
+
+```
+10
+1
+2
+5
+7
+---- Reverse ----
+7
+5
+2
+1
+10
+---- Insert 11 at 3 ------
+10
+1
+2
+11
+5
+7
+---- Reverse ----
+7
+5
+11
+2
+1
+10
+---- Delete at 3 -----
+10
+1
+2
+5
+7
+---- Reverse ----
+7
+5
+2
+1
+10
+```
+
+Now that everything is working correctly we can make an
+improvement in our `traverse` method.
+
+We can now traverse in the reverse order if the index is closer to
+the last item that the first item.
+
+```js
+traverse(index) {
+  if (index >= 0 && index < this.length) {
+    // If index is closer to the first element then traverse from the first element
+    if (index < this.length/2) {
+      let i = 0;
+
+      let currentNode = this.firstNode;
+      while (i < index && currentNode) {
+        currentNode = currentNode.next;
+        i++;
+      }
+
+      return currentNode;
+    } else { // If index is closer to the last element then traverse from the last element
+      let i = this.length - 1;
+      let currentNode = this.lastNode;
+
+      while (i > index && currentNode) {
+        currentNode = currentNode.previous;
+        i--;
+      }
+
+      return currentNode;
+    }
+  } else {
+    return null;
+  }
+}
+```
+
+And here is the full implementation of Doubly Linked List:
+
+```js
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.previous = null;
+  }
+}
+
+class LinkedList {
+  constructor(firstValue) {
+    if (firstValue !== undefined && firstValue !== null) {
+      this.firstNode = new Node(firstValue);
+      this.lastNode = this.firstNode;
+      this.length = 1;
+    } else {
+      this.firstNode = null;
+      this.lastNode = null;
+      this.length = 0;
+    }
+  }
+
+  push(value) {
+    if (this.lastNode) {
+      const newNode = new Node(value)
+      this.lastNode.next = newNode;
+      newNode.previous = this.lastNode;
+      this.lastNode = newNode;
+    } else {
+      this.firstNode = new Node(value);
+      this.lastNode = this.firstNode;
+    }
+
+    this.length++;
+  }
+
+  print() {
+    let currentNode = this.firstNode;
+
+    while (currentNode) {
+      console.log(currentNode.value);
+      currentNode = currentNode.next;
+    }
+  }
+
+  printReverse() {
+    let currentNode = this.lastNode;
+
+    while(currentNode) {
+      console.log(currentNode.value);
+      currentNode = currentNode.previous;
+    }
+  }
+
+  unshift(value) {
+    const newNode = new Node(value);
+    newNode.next = this.firstNode;
+    this.firstNode = newNode;
+    this.firstNode.next.previous = this.firstNode;
+
+    this.length++;
+  }
+
+  traverse(index) {
+    if (index >= 0 && index < this.length) {
+      // If index is closer to the first element then traverse from the first element
+      if (index < this.length/2) {
+        let i = 0;
+        let currentNode = this.firstNode;
+
+        while (i < index && currentNode) {
+          currentNode = currentNode.next;
+          i++;
+        }
+
+        return currentNode;
+      } else { // If index is closer to the last element then traverse from the last element
+        let i = this.length - 1;
+        let currentNode = this.lastNode;
+
+        while (i > index && currentNode) {
+          currentNode = currentNode.previous;
+          i--;
+        }
+
+        return currentNode;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  lookup(index) {
+    const node = this.traverse(index);
+
+    if (node) {
+      return node.value;
+    } else {
+      return null;
+    }
+  }
+
+  insert(index, value) {
+    const nodeAtIndex = this.traverse(index);
+    const nodeAtPreviousIndex = nodeAtIndex.previous;
+
+    if (nodeAtIndex) {
+      const newNode = new Node(value);
+      newNode.next = nodeAtIndex;
+      nodeAtIndex.previous = newNode;
+
+      if (nodeAtPreviousIndex) {
+        nodeAtPreviousIndex.next = newNode;
+        newNode.previous = nodeAtPreviousIndex;
+      }
+
+      this.length++;
+    } else if (index === this.length) {
+      this.push(value);
+    }
+  }
+
+  delete(index) {
+    const nodeAtIndex = this.traverse(index);
+    const nodeAtNextIndex = nodeAtIndex.next;
+    const nodeAtPreviousIndex = nodeAtIndex.previous;
+
+    if (nodeAtPreviousIndex) {
+      nodeAtPreviousIndex.next = nodeAtNextIndex;
+      nodeAtNextIndex.previous = nodeAtPreviousIndex;
+    }
+
+  }
+}
+
+let test = new LinkedList(1);
+test.push(2);
+test.push(5);
+test.push(7);
+test.unshift(10);
+test.print();
+console.log("---- Reverse ----")
+test.printReverse();
+console.log("---- Insert 11 at 3 ------")
+test.insert(3, 11);
+test.print();
+console.log("---- Reverse ----")
+test.printReverse();
+console.log("---- Delete at 3 -----")
+test.delete(3);
+test.print();
+console.log("---- Reverse ----")
+test.printReverse();
+```
+
+
+#### Reversing a Linked List
+
+This is the most common interview question related to linked list.
+
+And we are going to use a Singly Linked List for this.
+
+Remember that we don't to want to print the Linked List in a reverse
+order like we did in the Doubly Linked List.
+
+we want to make the given Linked List in the reverse order.
+
+The algorithm to reverse a Linked List looks like this:
+
+```
+If the linked list has elements less or equal to 1 then do nothing.
+
+Else get the reference to the first and the second Node to the `first` and `second` variable and make the `first` LinkedList's last node;
+
+While the second Node exists:
+  Store the reference to the `next` of the `second` variable in a `temp` variable.
+  Make the `second` variable point to the `first`.
+  `first` is now `second`.
+  `second` is now `temp`.
+
+Now make the `next` of LinkedList's first Node `null` because it's now the last element.
+And make `first` the LinkedList's first element.
+```
+
+Now that's confusing as hell but before I explain what is
+going on here let's look at the JavaScript code.
+
+```js
+reverse() {
+  if (this.length <= 1) {
+    // Do nothing
+  } else {
+    let first = this.firstNode;
+    let second  = first.next;
+    this.lastNode = first;
+
+    while(second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
+    }
+
+    this.firstNode.next = null;
+    this.firstNode = first;
+  }
+}
+```
+
+This is one of the most difficult concepts to understand,
+basically what we are doing is we have two pointers that point to the first and second Node of the list and as we
+loop through the list we make the second Node point to the
+first Node.
+
+It's very hard to understand this algorithm by just reading
+so I recommend you to watch this [Youtube Video](https://www.youtube.com/watch?v=G0_I-ZF0S38)/
