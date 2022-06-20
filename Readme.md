@@ -647,8 +647,8 @@ to explain this is using a diagram.
 
 ![Linked List Diagram](./LinkedList.png)
 
-A linked list is a collection of nodes, each node has two
-sections. One stores the data and the other points to the next node in the list.
+A linked list is a collection of Nodes, each Node has two
+sections. One stores the data and the other points to the next Node in the list.
 
 So how does this differs from an array?
 
@@ -656,10 +656,10 @@ In an array, all the elements are stored sequentially.
 This mean if we have the address to the first element of the array
 we can get the second element by just adding 1 to the address.
 
-But In a linked list all the nodes are stored in random places in memory.
-So the access the second node we need to use the pointer in the
-first node that is pointing to the second node and so on.
-The last node points to nothing, that how we know it's the last node.
+But In a linked list all the Nodes are stored in random places in memory.
+So the access the second Node we need to use the pointer in the
+first Node that is pointing to the second Node and so on.
+The last Node points to nothing, that how we know it's the last Node.
 
 Most programming languages don't come with linked list built-in
 because nobody uses linked list in their applications.
@@ -682,7 +682,7 @@ works if you want to learn about them.
 In an array, accessing an element by index has O(1) time complexity.
 
 But in Linked List because data is not stored in sequence in the memory
-we need to iterate through one node to another to get to the desired element.
+we need to iterate through one Node to another to get to the desired element.
 
 **Prepend**
 
@@ -704,11 +704,11 @@ Here is a visual representation of adding an element to a Linked List:
 
 ![Visual representaion of adding an element in Linked List](./AddingLinkedList.png)
 
-If we want to add a node/element to an index first we need to traverse to the index.
+If we want to add a Node/element to an index first we need to traverse to the index.
 
-[1]Then create a new node that will point to the node which we just found.
+[1]Then create a new Node that will point to the Node which we just found.
 
-[2]Then make the previous node point to the newly created node.
+[2]Then make the previous Node point to the newly created Node.
 
 #### What is a pointer?
 
@@ -757,7 +757,443 @@ console.log(b.value) // => 10
 
 By using an object we have two variables that points to the same location in the memory.
 
-This is how we will make one node(a object) point to the other node(a object).
+This is how we will make one Node(a object) point to the other Node(a object).
 
 #### Implementing Linked List
 
+First, let's implement a Node using OOP
+
+```js
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+```
+
+That's it, it's that easy to implement a Node for a linked list.
+
+Now we need a class to store our list and have useful methods to work with our list.
+
+```js
+class LinkedList {
+  constructor(firstValue) {
+    if (firstValue !== undefined && firstValue !== null) {
+      this.firstNode = new Node(firstValue);
+      this.lastNode = this.firstNode; // Storing a refrence
+      this.length = 1;
+
+    } else {
+      this.firstNode = null;
+      this.lastNode = null;
+      this.length = 0;
+    }
+  }
+
+  push(value) {
+    // Add a Node to the end
+  }
+}
+```
+
+What we are doing here is that in the constructor we have a choice to
+put the first element in the list when we create a linked list.
+
+We will always have a reference to the first Node in our list and the last Node.
+If we have only one Node then it's both the first and the last Node.
+
+We will also keep the count of the nodes in the `length` property.
+
+Now let's implement the push method.
+
+```js
+class LinkedList {
+  constructor(firstValue) {
+    if (firstValue !== undefined && firstValue !== null) {
+      this.firstNode = new Node(firstValue);
+      this.lastNode = this.firstNode; // Storing a refrence
+      this.length = 1;
+
+    } else {
+      this.firstNode = null;
+      this.lastNode = null;
+      this.length = 0;
+    }
+  }
+
+  push(value) {
+    if (this.lastNode) {
+      const newNode = new Node(value)
+      this.lastNode.next = newNode;
+      this.lastNode = newNode;
+    } else {
+      this.firstNode = new Node(value);
+      this.lastNode = this.firstNode; // Storing a refrence
+    }
+    this.length++;
+  }
+}
+```
+
+Because we have the reference to the last Node of the list adding a new Node is easy.
+But first, we need to check if last Node exists because the list could be empty.
+
+If it's empty then do the same thing we did in the constructor. If the last Node
+exists then just create a new Node and store it in the `next`
+of the last Node and then make the new Node the last Node.
+
+Now we need a way to check if our Linked list is working properly so
+let's make a method to print our linked list.
+
+```js
+class LinkedList {
+  constructor(firstValue) {
+    if (firstValue !== undefined && firstValue !== null) {
+      this.firstNode = new Node(firstValue);
+      this.lastNode = this.firstNode; // Storing a refrence
+      this.length = 1;
+        
+    } else {
+      this.firstNode = null;
+      this.lastNode = null;
+      this.length = 0;
+    }
+  }
+
+  push(value) {
+    if (this.lastNode) {
+      const newNode = new Node(value)
+      this.lastNode.next = newNode;
+      this.lastNode = newNode;
+
+    } else {
+      this.firstNode = new Node(value);
+      this.lastNode = this.firstNode; // Storing a refrence
+    }
+
+      this.length++;
+  }
+
+  print() {
+    let currentNode = this.firstNode;
+    
+    while (currentNode) {
+      console.log(currentNode.value);
+      currentNode = currentNode.next;
+    }
+  }
+}
+```
+
+As you can see it's working as intended.
+
+```js
+let test = new LinkedList(1);
+test.push(2);
+test.push(5);
+test.push(7);
+test.print(); 
+
+// Output
+// 1
+// 2
+// 5
+// 7
+```
+
+Now let's add a method to add a value to the beginning of the list.
+
+We'll call this `unShift` because that's the method for adding an element
+to the beginning of the array is called in JavaScript.
+
+```js
+unshift(value) {
+  const newNode = new Node(value);
+  newNode.next = this.firstNode;
+  this.firstNode = newNode;
+  
+  this.length++;
+}
+```
+
+What we are doing here is first we make a new Node then make the new Node point
+to the first Node in our list then make the new Node our first Node.
+
+```js
+let test = new LinkedList(1);
+test.push(2);
+test.push(5);
+test.push(7);
+test.unshift(10);
+test.print();
+
+// Output
+// 10
+// 1
+// 2
+// 5
+// 7
+```
+
+Up until now, all the method that we have defined has O(1) time complexity
+except the print function.
+
+Now we are left with `lookup`, `insert` and `delete` operations.
+
+All of them are similar and have O(n) time complexity.
+
+Let's first implement a `traverse` method because the above method will depend on this.
+
+What the` traverse` method will do is that it'll go through each node
+one by one and return the node for the given index, with the index starting at 0.
+
+```js
+traverse(index) {
+  if (index >= 0 && index < this.length) {
+    let i = 0;
+    let currentNode = this.firstNode;
+
+    while (i < index && currentNode) {
+      currentNode = currentNode.next;
+      i++;
+    }
+    return currentNode;
+
+  } else {
+    return null;
+  }
+}
+```
+
+This method looks similar to the print method, what we are doing
+different is first we are checking if the index is within the length
+then traverse through the list and return the node at the index.
+
+After running this test code we'll get some interesting results.
+
+```js
+let test = new LinkedList(1);
+test.push(2);
+test.push(5);
+test.push(7);
+test.unshift(10);
+console.log(test.lookup(0));
+console.log(test.lookup(1));
+console.log(test.lookup(2));
+console.log(test.lookup(10));
+
+// Output
+// Node {
+//   value: 10,
+//   next: Node { value: 1, next: Node { value: 2, next: [Node] } }
+// }
+// Node {
+//   value: 1,
+//   next: Node { value: 2, next: Node { value: 5, next: [Node] } }
+// }
+// Node {
+//   value: 2,
+//   next: Node { value: 5, next: Node { value: 7, next: null } }
+// }
+// null
+```
+
+If we print a node we can see the rest of the list after that node.
+and If we try of get a node that doesn't exist we get null.
+
+Now implementing the `lookup` method will be easy.
+
+```js
+lookup(index) {
+  const node = this.traverse(index);
+
+  if (node) {
+    return node.value;
+  } else {
+    return null;
+  }
+}
+```
+
+All we need to do is return the value of the node if it exists.
+
+Now let's do the `insert` method.
+
+```js
+insert(index, value) {
+  const nodeAtIndex = this.traverse(index);
+  const nodeAtPreviousIndex = this.traverse(index-1);
+
+  if (nodeAtIndex) {
+    const newNode = new Node(value);
+    newNode.next = nodeAtIndex;
+
+    if (nodeAtPreviousIndex) {
+      nodeAtPreviousIndex.next = newNode;
+    }
+
+    this.length++;
+  } else if (index === this.length) {
+    this.push(value);
+  }
+}
+```
+
+Let's go step by step to see what this is doing.
+
+First, we take two references, one for the node at the index and
+the second one for the node at the previous index.
+
+Then we check if the node at the index exists. If it does then
+create a new node and make it point the node at the index.
+
+Then check if the previous node exists and make the previous node point
+the to the new node.
+
+If the node at the index does not exist then if the index is the same
+as the length of the list use the push method.
+
+Now it's time for the last method in our list.
+
+```js
+delete(index) {
+  const nodeAtNextIndex = this.traverse(index+1);
+  const nodeAtPreviousIndex = this.traverse(index-1);
+
+  if (nodeAtPreviousIndex) {
+    nodeAtPreviousIndex.next = nodeAtNextIndex;
+  }
+}
+```
+
+To delete a node at an index you just need to make the previous node point
+to the node next to the node at the given index.
+
+Because JavaScript uses a garbage collector the node that no one has
+reference to will automatically get deleted from the memory but in other languages
+you may have to manually free the memory occupied by the node.
+
+Here is the full implementaion of Linked List
+
+```js
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor(firstValue) {
+    if (firstValue !== undefined && firstValue !== null) {
+      this.firstNode = new Node(firstValue);
+      this.lastNode = this.firstNode; // Storing a refrence
+      this.length = 1;
+
+    } else {
+      this.firstNode = null;
+      this.lastNode = null;
+      this.length = 0;
+    }
+  }
+
+  push(value) {
+    if (this.lastNode) {
+      const newNode = new Node(value)
+      this.lastNode.next = newNode;
+      this.lastNode = newNode;
+
+    } else {
+      this.firstNode = new Node(value);
+      this.lastNode = this.firstNode; // Storing a refrence
+    }
+
+    this.length++;
+  }
+
+  print() {
+    let currentNode = this.firstNode;
+
+    while (currentNode) {
+      console.log(currentNode.value);
+      currentNode = currentNode.next;
+    }
+  }
+
+  unshift(value) {
+    const newNode = new Node(value);
+    newNode.next = this.firstNode;
+    this.firstNode = newNode;
+
+    this.length++;
+  }
+
+  traverse(index) {
+    if (index >= 0 && index < this.length) {
+      let i = 0;
+      let currentNode = this.firstNode;
+
+      while (i < index && currentNode) {
+        currentNode = currentNode.next;
+        i++;
+      }
+      return currentNode;
+
+    } else {
+      return null;
+    }
+  }
+
+  lookup(index) {
+    const node = this.traverse(index);
+
+    if (node) {
+      return node.value;
+    } else {
+      return null;
+    }
+  }
+
+  insert(index, value) {
+    const nodeAtIndex = this.traverse(index);
+    const nodeAtPreviousIndex = this.traverse(index-1);
+
+    if (nodeAtIndex) {
+      const newNode = new Node(value);
+      newNode.next = nodeAtIndex;
+
+      if (nodeAtPreviousIndex) {
+        nodeAtPreviousIndex.next = newNode;
+      }
+
+      this.length++;
+    } else if (index === this.length) {
+      this.push(value);
+    }
+  }
+
+  delete(index) {
+    const nodeAtNextIndex = this.traverse(index+1);
+    const nodeAtPreviousIndex = this.traverse(index-1);
+
+    if (nodeAtPreviousIndex) {
+      nodeAtPreviousIndex.next = nodeAtNextIndex;
+    }
+
+  }
+}
+
+let test = new LinkedList(1);
+test.push(2);
+test.push(5);
+test.push(7);
+test.unshift(10);
+test.print();
+console.log("-----------")
+test.insert(3, 11);
+test.print();
+console.log("-----------")
+test.delete(3);
+test.print();
+```
