@@ -1588,12 +1588,13 @@ test.printReverse();
 
 This is the most common interview question related to linked list.
 
-And we are going to use a Singly Linked List for this.
+And we are going to use a Singly Linked List for this because in
+Doubly Linked List there is not need to reverse it.
 
 Remember that we don't to want to print the Linked List in a reverse
 order like we did in the Doubly Linked List.
 
-we want to make the given Linked List in the reverse order.
+We want to make the given Linked List in the reverse order.
 
 The algorithm to reverse a Linked List looks like this:
 
