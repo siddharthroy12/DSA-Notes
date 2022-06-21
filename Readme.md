@@ -22,13 +22,15 @@ Contributions are welcomed.
     3. [Hash Tables](#hash-tables)
     4. [Linked List](#linked-list)
     5. [Stacks and Queues](#stacks-and-queues)
+    6. Priority Queue (Will do later)
     6. [Trees](#trees)
     7. [Graphs](#graphs)
 3. [Algorithms](#algorithms)
     1. [Recursion](#recursion)
-    2. [Sorting](#sorting)
-    3. [BFS and DFS](#bfs-and-dfs)
-    4. [Dynamic Programming](#dynamic-programming)
+    2. Back Tracking (Will do later)
+    3. [Sorting](#sorting)
+    4. [BFS and DFS](#bfs-and-dfs)
+    5. [Dynamic Programming](#dynamic-programming)
 5. [How to solve coding problems](#how-to-solve-coding-problems)
 6. [Coding Problems](#coding-problems)
 
@@ -1715,7 +1717,7 @@ Queues are useful when you are making an App where you need a waiting list.
 
 ##### Queue Operations
 
-**Lookup** O(n)
+**Lookup** O(n) If you follow the constraints otherwise O(1)
 
 **Enqueue** O(1) Enqueue add the element before the last element so the new element becomes the last element.
 
@@ -1723,11 +1725,116 @@ Queues are useful when you are making an App where you need a waiting list.
 
 **Peek** O(1) Peek points to the first element
 
+#### Stack Vs Queue
+
+Stacks are used in areas like undo/redo, browser history, Syntax parsing, and Virtual Machines.
+
+Queues are used for CPU task scheduling, Handling of interrupts, and waiting list in an App.
+
+
+![Stack vs Queue diagram](./StackVsQueue.png)
+
 #### Implementing Stack and Queues
 
 There is no need to create another class for Stack because you can just
 use an array because Stack and Array are the same if you only use the push and pop operation and read only the last element of the array.
 
-And in all Stack-related interview questions you will be given an array.
+```js
+// Stack using array
+let myStack = [1,2,3,4,5];
+myStack[myStack.length-1] // Peek
+myStack.push(); // In some languages it's called append
+myStack.pop(); // Pop
+```
+
+We can also implement stack using Linked List but in all Stack-related interview questions you will be given an array.
 
 The Queue on the other hand is similar to Linked List if when removing an element you remove the first element and when adding an element you add the to the end of the list and read only the first element of the list.
+
+```js
+let myQueue = new LinkedList(); // The linked list from the previous section
+
+myQueue.lookup(0) // Peek
+myQueue.push() // Enqueue
+myQueue.remove(0) // Dequeue
+```
+
+#### Implement Queue using Stacks
+
+This is the most commonly asking question related to Stack and Queues.
+
+A queue is FIFO (first-in-first-out) but a stack is LIFO (last-in-first-out). This means the newest element must be pushed to the bottom of the stack. To do that we need to unilize two stacks.
+
+```js
+class Queue {
+  constructor() {
+    this.main = [];
+    this.temp = [];
+  }
+
+  enqueue() {}
+  dequeue() {}
+  peek() {}
+}
+```
+
+Because the first element to go in needs to be the first element of our main stack we need to pop and push all the elements from the main stack to the temp stack and then push the new element to the temp stack. After that pop and push all the elements from the temp stack back the the main stack.
+
+
+```js
+enqueue(element) {
+  while(this.main.length > 0) {
+    this.temp.push(this.main.pop());
+  }
+
+  this.temp.push(element);
+
+  while(this.temp.length > 0) {
+    this.main.push(this.temp.pop());
+  }
+}
+```
+
+This makes the enqueue method O(n) instead of O(1) but this is a stupid question anyway so we don't care.
+
+Here is the full implementaion with dequeue and peek:
+
+```js
+class Queue {
+  constructor() {
+    this.main = [];
+    this.temp = [];
+  }
+
+  enqueue(element) {
+    while(this.main.length > 0) {
+      this.temp.push(this.main.pop());
+    }
+
+    this.temp.push(element);
+
+    while(this.temp.length > 0) {
+      this.main.push(this.temp.pop());
+    }
+  }
+
+  dequeue() {
+    return this.main.pop();
+  }
+
+  peek() {
+    return this.main[this.main.length - 1];
+  }
+}
+
+const myQueue = new Queue();
+console.log(myQueue.peek());
+myQueue.enqueue('Roy');
+myQueue.enqueue('Dishant');
+myQueue.enqueue('Burhan');
+console.log(myQueue.peek());
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+console.log(myQueue.peek());
+```
