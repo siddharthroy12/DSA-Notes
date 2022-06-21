@@ -22,17 +22,16 @@ Contributions are welcomed.
     3. [Hash Tables](#hash-tables)
     4. [Linked List](#linked-list)
     5. [Stacks and Queues](#stacks-and-queues)
-    6. Priority Queue (Will do later)
-    6. [Trees](#trees)
-    7. [Graphs](#graphs)
-3. [Algorithms](#algorithms)
-    1. [Recursion](#recursion)
-    2. Back Tracking (Will do later)
-    3. [Sorting](#sorting)
-    4. [BFS and DFS](#bfs-and-dfs)
-    5. [Dynamic Programming](#dynamic-programming)
-5. [How to solve coding problems](#how-to-solve-coding-problems)
-6. [Coding Problems](#coding-problems)
+    6. Trees
+    7. Graphs
+3. Algorithms
+    1. Recursion
+    2. Back Tracking
+    3. Sorting
+    4. BFS and DFS
+    5. Dynamic Programming
+5. How to solve coding problems
+6. Coding Problems
 
 ## Big O
 
