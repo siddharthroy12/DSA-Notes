@@ -21,7 +21,7 @@ Contributions are welcomed.
     2. [Arrays](#array)
     3. [Hash Tables](#hash-tables)
     4. [Linked List](#linked-list)
-    5. [Stacks and Queues](#queues)
+    5. [Stacks and Queues](#stacks-and-queues)
     6. [Trees](#trees)
     7. [Graphs](#graphs)
 3. [Algorithms](#algorithms)
@@ -1646,3 +1646,88 @@ list we make the second Node point to the first Node.
 
 It's very hard to understand this algorithm by just reading so I recommend
 you to watch this [Youtube Video](https://www.youtube.com/watch?v=G0_I-ZF0S38).
+
+### Stacks and Queues
+
+Stacks and Queues are very similar, there are both linear data-structure
+and linear data structures allow us to traverse(go through elements sequentially)
+and only one data element can be directly reached.
+
+#### Stacks
+
+A stack is a type of data structure where data elements are stacked on top of each other like a stack of plates. And you can only touch the top plate(when inserting, removing, or peeking).
+
+To get to the bottom plate you will have to remove the top plates one by one.
+
+And if you want to add a data element you can only put it on the top of the stack.
+
+This is called LIFO(Last In First Out) because the last one to get
+inserted into the stack(the top plate) will be the first one to get out.
+
+![Stack animation](./Stack.gif)
+
+The act of inserting an element into the stack is called Push
+and the act of removing an element is called Pop.
+
+Programming languages use the stack data structure to keep track of function calls,
+it's known as Call Stack.
+
+When a function gets called it gets pushed into the Call Stack and starts to execute executed.
+When another function inside that function gets called the other function gets pushed
+to the stack and popped when it's done executing.
+
+![Call Stack animation](./CallStack.gif)
+
+Call Stack has limited space and it can get overflowed if you use a recursive function that
+never ends causing the program to crash with Stack Overflow.
+
+Another good example of stack is browser history ( ͡° ͜ʖ ͡°).
+
+When we visit a site it gets pushed to our histroy and when we press the back button it gets poped.
+
+##### Stack Operations
+
+**Lookup** O(n)
+
+**Push** O(1) Push add the element on top of the last element
+
+**Pop** O(1) Pop remove the top last element
+
+**Peek** O(1) The Peek points to the last element.
+
+#### Queues
+
+Queue data structure is like a line of people waiting to
+go inside a theater.
+
+The first person in the line will go first inside the theater and the last person in the line will be the last one
+to go inside the theater.
+
+![Queue animation](./Queue.jpg)
+
+It's opposite of Stack. In Stack the first plate to get in is
+the last plate to get out.
+
+But in a Queue the first person to go in is the first one to
+go out which is called FIFO(First In First Out).
+
+Queues are useful when you are making an App where you need a waiting list.
+
+##### Queue Operations
+
+**Lookup** O(n)
+
+**Enqueue** O(1) Enqueue add the element before the last element so the new element becomes the last element.
+
+**Dequeue** O(1) Dequeue remove the first element and the second element becomes the first element.
+
+**Peek** O(1) Peek points to the first element
+
+#### Implementing Stack and Queues
+
+There is no need to create another class for Stack because you can just
+use an array because Stack and Array are the same if you only use the push and pop operation and read only the last element of the array.
+
+And in all Stack-related interview questions you will be given an array.
+
+The Queue on the other hand is similar to Linked List if when removing an element you remove the first element and when adding an element you add the to the end of the list and read only the first element of the list.
