@@ -1,6 +1,6 @@
-# My notes on DSA and leetcode questions
+# My notes on DSA
 
-I'm making my detailed notes here as I'm re-learning DSA.
+I'm making my detailed notes here as I'm learning DSA.
 This can be useful to you even if you don't have any knowledge of DSA.
 
 > **Warning:** This is in work in process
@@ -1853,7 +1853,7 @@ The tree data structure is important because you work with them every day.
 
 The files and folders in your disk are stored in a tree structure.
 
-And if you have coded HTML you may know that also represents a Tree
+And if you have coded HTML you may know that it also represents a Tree
 Structure of HTML Elements.
 
 **Terms in Tree:**
