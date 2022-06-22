@@ -22,7 +22,7 @@ Contributions are welcomed.
     3. [Hash Tables](#hash-tables)
     4. [Linked List](#linked-list)
     5. [Stacks and Queues](#stacks-and-queues)
-    6. Trees
+    6. [Trees](#trees)
     7. Graphs
 3. Algorithms
     1. Recursion
@@ -1837,3 +1837,169 @@ myQueue.dequeue();
 myQueue.dequeue();
 console.log(myQueue.peek());
 ```
+
+### Trees
+
+The tree data structure is based on Linked List and it is called "tree" because
+it looks like an upside-down tree.
+
+![Tree Diagram](./Tree.webp)
+
+Here we have a root node that every child descends from.
+A node can only have one parent node but can have any number
+of children nodes. So we have a uni directional parent-child relationship.
+
+The tree data structure is important because you work with them every day.
+
+The files and folders in your disk are stored in a tree structure.
+
+And if you have coded HTML you may know that also represents a Tree
+Structure of HTML Elements.
+
+**Terms in Tree:**
+
+- **Root**: The root of a tree is the topmost node of the tree that has no parent node. There is only one root node in every tree.
+
+- **Edge**: Edge acts as a link between the parent node and the child node.
+
+- **Leaf**: A node that has no child is known as the leaf node. It is the last node of the tree. There can be multiple leaf nodes in a tree.
+
+- **Depth of Node**: The depth of the node is the distance from the root node to that particular node.
+
+- **Height of Node**: The height of the node is the distance from that node to the deepest node of the tree.
+
+- **Height of tree**: The Height of the tree is the maximum height of any node.
+
+#### Why use Trees?
+
+1. One reason to use trees might be because you want to store information that naturally forms a hierarchy. For example, the file system on a computer:
+
+![File System diagram](./FileSystem.jpg)
+
+2. Trees (with some ordering e.g., BST) provide moderate access/search (quicker than Linked List and slower than arrays). 
+
+3. Trees provide moderate insertion/deletion (quicker than Arrays and slower than Unordered Linked Lists). 
+
+4. Like Linked Lists and unlike Arrays, Trees don't have an upper limit on the number of nodes as nodes are linked using pointers.
+
+#### Main applicaiton of Trees:
+
+- Manipulate hierarchical data. 
+- Make information easy to search. 
+- Manipulate sorted lists of data.
+- Form of multi-stage decision-making.
+
+#### Binary Tree
+
+A Binary Tree is a type of Tree Data Structure where a parent node can only
+have either 0, 1 or two nodes.
+
+Since each element in a binary tree can have only 2 children, we typically name them the left and right child
+
+![Binary Tree Diagram](./BinaryTree.jpeg)
+
+#### Operations on Binary Tree
+
+**Inserting** O(n)
+
+**Removing** O(n)
+
+**Searching** O(n)
+
+#### Types of Binary Tree
+
+##### Full Binary Tree:
+
+A full Binary tree is a special type of binary tree in which every
+parent node/internal node has either two or no children. It is also
+known as a proper binary tree.
+
+![Full Binary Tree Diagram](./FullBinaryTree.png)
+
+##### Complete Binary Tree:
+
+A Binary Tree is a Complete Binary Tree if all the levels are
+completely filled except possibly the last level and the last level
+has all keys as left as possible.
+
+A complete binary tree is just like a full binary tree, but with two major differences:
+
+- Every level must be completely filled.
+- All the leaf elements must lean towards the left.
+- The last leaf element might not have a right sibling i.e. a complete 
+binary tree doesn't have to be a full binary tree.
+
+![Complete Binary Tree Diagram](./CompleteBinaryTree.png)
+
+##### Perfect Binary Tree:
+
+A Binary tree is a Perfect Binary Tree in which all the internal nodes have two children and all leaf nodes are at the same level. 
+
+![Perfect Binary Tree Diagram](./PerfectBinaryTree.png)
+
+##### Balanced Tree:
+
+A binary tree is balanced if the height of the tree is O(Log n) where n is the number of nodes.
+
+![Balanced Binary Tree Diagram](./BalancedBinaryTree.png)
+
+##### Degenerate(or Pathological) Binary Tree:
+
+A Binary Tree is Degenerate Binary Tree where every parent node has only one child node.
+
+This is bacially a Linked List.
+
+![DegenerateBinaryTree](./DegenerateBinaryTree.png)
+
+#### Binary Search Tree
+
+Binary Search Tree are really good at searching because each node has a relation with it's child node.
+
+For example take a look at this Tree:
+
+![Diagram of Binary Search Tree](./BinarySearchTree.jpeg)
+
+Here the right side of each node is smaller than it's parent node and
+the right side of each node is bigger than it's parent node.
+
+And this makes searching very easy because at each node we know what
+direction we need to go the find our node. And this is how we avoid
+checking through all the nodes.
+
+#### Operations on Search Binary Trees
+
+**Lookup** O(Log n)
+
+**Insert** O(Log n)
+
+**Delete** O(log n)
+
+#### Why O(Log n)?
+
+In computer science, we use Log with base 2 instead of base 10.
+
+And if we put the number of nodes of a Binary Tree and
+the log2 function with one added we will get the height of the Binary Tree.
+
+You could look at it like this
+
+log2(n + 1) = h
+
+Where n is the number of nodes and h is the height.
+
+log2(1 + 1) = 1
+
+log2(3 + 1) = 2
+
+log2(7 + 1) = 3
+
+log2(15 + 1) = 4
+
+log2(31 + 1) = 5
+
+And in a Binary Tree the number of steps to get to
+the desired node is equal the height of the Tree because
+at each node, we know which way we need to go.
+
+So the Big O becomes O(log(n+1)) and after removing the constant
+it becomes O(log n).
