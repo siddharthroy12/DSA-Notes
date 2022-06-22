@@ -1858,29 +1858,37 @@ Structure of HTML Elements.
 
 **Terms in Tree:**
 
-- **Root**: The root of a tree is the topmost node of the tree that has no parent node. There is only one root node in every tree.
+- **Root**: The root of a tree is the topmost node of the tree that has no parent node.
+There is only one root node in every tree.
 
 - **Edge**: Edge acts as a link between the parent node and the child node.
 
-- **Leaf**: A node that has no child is known as the leaf node. It is the last node of the tree. There can be multiple leaf nodes in a tree.
+- **Leaf**: A node that has no child is known as the leaf node.
+It is the last node of the tree. There can be multiple leaf nodes in a tree.
 
-- **Depth of Node**: The depth of the node is the distance from the root node to that particular node.
+- **Depth of Node**: The depth of the node is the distance from the root node
+to that particular node.
 
-- **Height of Node**: The height of the node is the distance from that node to the deepest node of the tree.
+- **Height of Node**: The height of the node is the distance from that node to the
+deepest node of the tree.
 
 - **Height of tree**: The Height of the tree is the maximum height of any node.
 
 #### Why use Trees?
 
-1. One reason to use trees might be because you want to store information that naturally forms a hierarchy. For example, the file system on a computer:
+1. One reason to use trees might be because you want to store information that naturally
+forms a hierarchy. For example, the file system on a computer:
 
 ![File System diagram](./FileSystem.jpg)
 
-2. Trees (with some ordering e.g., BST) provide moderate access/search (quicker than Linked List and slower than arrays). 
+2. Trees (with some ordering e.g., BST) provide moderate access/search
+(quicker than Linked List and slower than arrays). 
 
-3. Trees provide moderate insertion/deletion (quicker than Arrays and slower than Unordered Linked Lists). 
+3. Trees provide moderate insertion/deletion (quicker than Arrays and slower
+than Unordered Linked Lists). 
 
-4. Like Linked Lists and unlike Arrays, Trees don't have an upper limit on the number of nodes as nodes are linked using pointers.
+4. Like Linked Lists and unlike Arrays, Trees don't have an upper limit on the
+number of nodes as nodes are linked using pointers.
 
 #### Main applicaiton of Trees:
 
@@ -1894,7 +1902,8 @@ Structure of HTML Elements.
 A Binary Tree is a type of Tree Data Structure where a parent node can only
 have either 0, 1 or two nodes.
 
-Since each element in a binary tree can have only 2 children, we typically name them the left and right child
+Since each element in a binary tree can have only 2 children, we typically name them
+the left and right child
 
 ![Binary Tree Diagram](./BinaryTree.jpeg)
 
@@ -1933,13 +1942,15 @@ binary tree doesn't have to be a full binary tree.
 
 ##### Perfect Binary Tree:
 
-A Binary tree is a Perfect Binary Tree in which all the internal nodes have two children and all leaf nodes are at the same level. 
+A Binary tree is a Perfect Binary Tree in which all the internal nodes have two
+children and all leaf nodes are at the same level. 
 
 ![Perfect Binary Tree Diagram](./PerfectBinaryTree.png)
 
 ##### Balanced Tree:
 
-A binary tree is balanced if the height of the tree is O(Log n) where n is the number of nodes.
+A binary tree is balanced if the height of the tree is O(Log n) where n is
+the number of nodes.
 
 ![Balanced Binary Tree Diagram](./BalancedBinaryTree.png)
 
@@ -1953,7 +1964,7 @@ This is bacially a Linked List.
 
 #### Binary Search Tree
 
-Binary Search Tree are really good at searching because each node has a relation with it's child node.
+Binary Search Tree are really good at searching because it's sorted.
 
 For example take a look at this Tree:
 
