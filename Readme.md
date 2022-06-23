@@ -1903,7 +1903,7 @@ A Binary Tree is a type of Tree Data Structure where a parent node can only
 have either 0, 1 or two nodes.
 
 Since each element in a binary tree can have only 2 children, we typically name them
-the left and right child
+the left and right child.
 
 ![Binary Tree Diagram](./BinaryTree.jpeg)
 
@@ -1977,7 +1977,7 @@ And this makes searching very easy because at each node we know what
 direction we need to go the find our node. And this is how we avoid
 checking through all the nodes.
 
-##### Operations on Search Binary Trees
+##### Operations on Binary Search Trees
 
 **Lookup** O(Log n)
 
@@ -2178,3 +2178,76 @@ implement a Binary Search Tree in an Interview.
 I think this is enough for you to understand how Binary Search Tree works but if
 you want to know how to implement remove for a Binary Seach Tree you can watch
 [this video](https://www.youtube.com/watch?v=wMyWHO9F1OM).
+
+
+#### AVL Trees and Red Black Trees
+
+They are more advance types of Trees but they are not that important to learn
+unless you are preparing for MANGA(Meta, Apple, Netlify, Google and Amazon) Interview.
+
+So I'll put some resources here if you want to learn about them.
+
+AVL Trees: https://medium.com/basecs/the-little-avl-tree-that-could-86a3cae410c7
+
+Red Black Tree: https://medium.com/basecs/painting-nodes-black-with-red-black-trees-60eacb2be9a5
+
+#### Heap and Binary Heap
+
+A Heap is a special Tree-based data structure in which the tree is a complete binary tree. And it may sound fimiliar but it is not related to Heap memory.
+
+Generally, Heaps can be of two types:
+
+**Max-Heap**: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it's children. The same property must be recursively true for all sub-trees in that Binary Tree.
+
+**Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it's children. The same property must be recursively true for all sub-trees in that Binary Tree.
+
+Heap is also called Binary Heap, there are the same thing.
+
+![Max Heap and Min Heap Diagram](./MaxHeapAndMinHeap.png)
+
+#### Operations on Binary Heap
+
+**Lookup** O(n) We never use this in Binary Heap.
+
+For Max-Heap Lookup of largest number is O(1).
+
+For Min-Heap Lookup of smallest number O(1).
+
+**Insert** O(1) on average, O(log n) in worst case.
+
+**Delete** O(1) on average, O(log n) in worst case.
+
+
+When we work with Binary Heap we generally only look for the top most
+element. I'll be either Pushing, Popping or Reading the first Element all of these have O(1) time complexity.
+
+#### Why use Binary Heap
+
+Binary Heap is usefull if you want to have a list of items that
+stays sorted when you delete or insert an item. So it's useful when you want to get the data with either the highest priorty(Max Heap) or the lowest priorty(Min Heap).
+
+#### Implementing Binary Heap
+
+Generally when you are given a question in an interview that
+requires a Binary Heap, you do not have to implement Binary Heap
+from scratch, Like Arrays and Hashmaps, Binary Heap also comes with most
+Programming Languages.
+
+But if you want to understand how a Binary Heap works by implementing
+it then you can read this [article](https://blog.bitsrc.io/implementing-heaps-in-javascript-c3fbf1cb2e65).
+
+Because JavaScript doesn't have Binary Heap in-built you can just copy
+and paste an implementation of Binary Heap when solving a Leetcode Problem.
+And if you are in an interview ask the interviewer if they want you to
+implement the Binary Heap or you can just a npm library or CTRL+C + CTRL + V.
+
+Most likely you will never have to implement Binary Heap from scratch. You just need to know how to use this.
+
+#### How to solve a problem with Binary Heap
+
+Let's solve a Leetcode problem that can be solved efficently by
+Binary Heap.
+
+Q. Kth Largest Element in a Stream
+
+[coming soon]
