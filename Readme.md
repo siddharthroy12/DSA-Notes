@@ -2219,7 +2219,7 @@ For Min-Heap Lookup of smallest number O(1).
 
 
 When we work with Binary Heap we generally only look for the top most
-element. I'll be either Pushing, Popping or Reading the first Element all of these have O(1) time complexity.
+element. I'll be either Pushing, Popping, or Reading the first Element all of these have O(1) time complexity.
 
 #### Why use Binary Heap
 
