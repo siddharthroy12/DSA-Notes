@@ -1977,7 +1977,7 @@ And this makes searching very easy because at each node we know what
 direction we need to go the find our node. And this is how we avoid
 checking through all the nodes.
 
-#### Operations on Search Binary Trees
+##### Operations on Search Binary Trees
 
 **Lookup** O(Log n)
 
@@ -1985,7 +1985,7 @@ checking through all the nodes.
 
 **Delete** O(log n)
 
-#### Why O(Log n)?
+##### Why O(Log n)?
 
 In computer science, we use Log with base 2 instead of base 10.
 
@@ -2014,3 +2014,167 @@ at each node, we know which way we need to go.
 
 So the Big O becomes O(log(n+1)) and after removing the constant
 it becomes O(log n).
+
+#### Balanced vs Unbalanced Binary Tree
+
+Binary trees have several flavors. A balanced binary tree is one in which no leaf nodes are 'too far' from the root.
+
+For example, one definition of balanced could require that all leaf nodes have a depth that differs by at most 1.
+
+An unbalanced binary tree is one that is not balanced.
+
+Here is what a Balanced Binary Tree looks like:
+
+![Balanced Binary Tree Diagram](./BalancedBinaryTree.png)
+
+On the right side, we have Unbalanced Binary Trees, and on
+the left side we have Balanced Binary Trees.
+
+The problem with Unbalanced Binary Tree is that the
+Big O of access time in an Unbalanced Binary tree is O(n)
+where in a Balanced Binary Tree the access time is O(log n).
+
+That is because an unbalanced tree built from sorted data is effectively the same as a linked list.
+
+![Balanced vs Unbalanced Binary Tree Diagram](./BalancedVsUnbalancedBinaryTree.png)
+
+So keeping a Binary Tree balanced is important.
+
+
+#### Implementing Binary Search Tree
+
+After so much theory now it's time to code our first Tree.
+
+Just like the Linked List we need a class for our Node.
+
+```js
+class Node {
+  constructor(value) {
+    this.left = null;
+    this.right = null;
+    this.value = value;
+  }
+}
+```
+
+And a class for the Tree
+
+```js
+class BST {
+  constructor() {
+    this.root = null;
+  }
+
+  insert() {}
+  lookup() {}
+  remove() {}
+}
+```
+BST stands for Binary Search Tree, if you are confused.
+
+In this class we'll have three methods: `insert`, `lookup` and `remove`.
+
+Let's Implement the `insert` first:
+
+```js
+insert(value) {
+  const newNode = new Node(value);
+
+  // If the tree is empty then put the new node at the root
+  if (this.root === null) {
+    this.root = newNode;
+  } else {
+
+    let currentNode = this.root;
+
+    // Traverse through the nodes
+    while(true) {
+      // Left
+      if (value < currentNode.value) {
+        // If empty left space found put the new node there
+        if (!currentNode.left) {
+          currentNode.left = newNode;
+          break;
+        } else {
+          // If left node exist move to the left node
+          currentNode = currentNode.left
+        }
+      } else { // Right
+        // If empty right space found put the new node there
+        if (!currentNode.right) {
+          currentNode.right = newNode;
+          break;
+        } else {
+          // If right node exist move to the right node
+          currentNode = currentNode.right;
+        }
+      }
+    }
+  }
+}
+```
+
+First we check if the root node is null if it's null then the tree is empty
+So we put the new Node at the root.
+
+Then we traverse through the tree at each node we are checking which way to go(bigger value is to right and smaller value is to left) and if the next node is empty put the new node there else move to that node.
+
+
+You can test this out by running this
+
+```js
+let tree = new BST();
+
+tree.insert(5);
+tree.insert(2);
+tree.insert(18);
+tree.insert(-4);
+tree.insert(3);
+
+console.log(JSON.stringify(tree.root))
+```
+
+The output will give a JSON string that you can put in any online JSON tree
+viewer.
+
+The `lookup` method is very similar to the `insert`
+
+```js
+lookup(value) {
+  if (this.root === null) {
+    return null;
+  }
+
+  let currentNode = this.root;
+
+  while (currentNode.value !== value) {
+    if (value > currentNode.value) {
+      if (currentNode.right === null) {
+        return null;
+      } else {
+        currentNode = currentNode.right;
+      }
+    } else {
+      if (currentNode.left === null) {
+        return null;
+      } else {
+        currentNode = currentNode.left;
+      }
+    }
+  }
+
+  return currentNode;
+}
+```
+
+At each step in the loop, we are checking if the current node is equal to the given
+value if not then check the which side we need to go next if the next node is null
+then return null because we couldn't find the value.
+
+Now the last method in our list is the `remove` method which is way too complicated
+to implement so I'm going to skip over this one because no one will ever ask you to
+implement a Binary Search Tree in an Interview.
+
+I think this is enough for you to understand how Binary Search Tree works but if
+you want to know how to implement remove for a Binary Seach Tree you can watch
+[this video](https://www.youtube.com/watch?v=wMyWHO9F1OM).
