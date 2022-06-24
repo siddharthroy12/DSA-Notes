@@ -2426,4 +2426,156 @@ And the space complexity of this is O(n).
 
 #### Trie
 
-[Coming soon]
+A trie (pronounced as "try") or prefix tree is a tree data structure
+used to efficiently store and retrieve keys in a dataset of strings.
+
+There are various applications of this data structure,
+such as autocomplete and spellchecker.
+
+![Trie Diagram](./Trie.png)
+
+In the above example we have the words "Apple", "Apply", "App", "Manga", "Mango",
+"Ray", "Rat", and "Rats".
+
+The letters maked as blue shows where a word ends.
+
+Unlike other Trees, The root node in a Trie doesn't hold any value.
+
+### Implementing Trie
+
+The implementation of our Trie will have three methods:
+
+- `insert(word)` will insert a word into the trie.
+- `search(word)` will return `true` if a word exists and `false` otherwise.
+- `startsWith(word)` will return `true` if a word exists that starts with the given
+word otherwise `false`.
+
+A node in a Trie does three things: Storing a value, Pointing to other nodes, and
+marking if the node is a end of a word.
+
+```js
+class TrieNode {
+  constructor(value) {
+    this.value = value;
+    this.nexts = {};
+    this.end = false;
+  }
+}
+```
+
+We are using a hashmap because it will make finding the next node faster than
+using an array. O(n) for array and O(1) for hashmap.
+
+The Trie class:
+
+```js
+class Trie {
+  constructor() {
+    this.root = new TrieNode(null);
+  }
+
+  insert(word) {}
+  search(word) {}
+  startsWith(word) {}
+}
+```
+
+Let's first implement the `insert` method.
+
+```js
+insert(word) {
+  let currentNode = this.root;
+
+  for (let i = 0; i < word.length; i++) {
+    const letter = word[i];
+
+    if (currentNode.nexts[letter]) {
+      currentNode = currentNode.nexts[letter];
+
+      if (i === word.length-1) {
+        currentNode.end = true;
+      }
+
+      continue;
+    } else {
+      let newNode = new TrieNode(letter);
+
+      currentNode.nexts[letter] = newNode;
+
+      currentNode = newNode;
+
+      if (i === word.length-1) {
+        currentNode.end = true;
+      }
+
+      continue;
+    }
+  }
+}
+```
+
+This may look very complicated but it is a very simple algorithm.
+
+We are starting from the root node and looping over every letter of the word.
+
+If the current letter exists in the current node then move to that node and
+move to the next letter.
+
+If the current letter does not exist in the current node then create a new
+node and add it to the next of our current node then move to the new node and 
+letter.
+
+If we are at the end of the word mark the current node or the new now as the
+end.
+
+This takes O(n) time where n the length of the word.
+
+
+The `search` method:
+
+```js
+search(word) {
+  let currentNode = this.root;
+
+  for (let i = 0; i < word.length; i++) {
+    const letter = word[i];
+
+    if (!currentNode.nexts[letter]) {
+      return true;
+    }
+
+    currentNode = currentNode.nexts[letter];
+  }
+
+  return currentNode.end;
+}
+```
+
+We will traverse in the same way as we did in the `insert` method and if a
+letter does not exist we will return false.
+
+After the loop we will simply return the `end` property of the current node.
+
+The `starsWith` method is almost same as the `seach` method except the last
+line.
+
+```js
+startsWith(prefix) {
+  let currentNode = this.root;
+
+  for (let i = 0; i < prefix.length; i++) {
+    const letter = prefix[i];
+
+    if (!currentNode.nexts[letter]) {
+      return true;
+    }
+
+    currentNode = currentNode.nexts[letter];
+  }
+
+  return Object.keys(currentNode).length > 0;
+}
+```
+
+If the last letter of the word has more letters after it then it has more
+words after it.
