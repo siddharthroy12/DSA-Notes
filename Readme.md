@@ -2541,7 +2541,7 @@ search(word) {
     const letter = word[i];
 
     if (!currentNode.nexts[letter]) {
-      return true;
+      return false;
     }
 
     currentNode = currentNode.nexts[letter];
@@ -2567,7 +2567,7 @@ startsWith(prefix) {
     const letter = prefix[i];
 
     if (!currentNode.nexts[letter]) {
-      return true;
+      return false;
     }
 
     currentNode = currentNode.nexts[letter];
