@@ -23,7 +23,7 @@ Contributions are welcomed.
     4. [Linked List](#linked-list)
     5. [Stacks and Queues](#stacks-and-queues)
     6. [Trees](#trees)
-    7. Graphs
+    7. [Graphs](#graphs)
 3. Algorithms
     1. Recursion
     2. Back Tracking
@@ -2579,3 +2579,52 @@ startsWith(prefix) {
 
 If the last letter of the word has more letters after it then it has more
 words after it.
+
+### Graphs
+
+Graph is a collection of interconnected nodes. Kind of like the Internet.
+
+![Graph Diagram](./Graph.png)
+
+The lines connecting two nodes are called Edge.
+And the nodes are sometimes referred to as Vertex.
+
+Graphs are useful to model real-world relationships. Facebook uses it to track
+users' relationships with others, Amazon uses it for their recommendation engine.
+Google uses it in Google Maps where each node is a city and the edges are roads.
+
+#### Types of Graphs
+
+##### Directed and Undirected
+
+Pretty staightforward from looking at this picture.
+
+![Directed vs UnDirected Graph Diagram](./DirectedVsUnDirectedGraph.png)
+
+In a Directed Graph, we can only go forward from one node to another.
+
+But In an Undirected Graph, we can go forward and backward.
+
+Facebook uses Undirected Graph because if `person1` is a friend of `person2`.
+`person2` is also a friend of `person1` it's a unidirectional relationship.
+
+Twitter uses Directed Graph because if `person` follows `person2` that doesn't
+necessarily means `person2` follows `person1`.
+
+Note that we can have unidirectional edges in a Directed Graph.
+
+##### Weighted and UnWeighted
+
+In a Weighted Graph, edges have weight on them. It can represent anything.
+
+As for Google Maps, the weight on an edge is the distance between two cities.
+Which is how Google Maps can calculate the shortest path between two locations.
+
+![Weighted and UnWeighted Graph Diagram](./WeightedVsUnWeightedGraph.png)
+
+
+##### Cyclic vs Acyclic
+
+A Graph is called Cyclic Graph if there's at least one cycle on nodes is present.
+
+![Cyclic And Acyclic Graph Diagram](./CyclicVsAcyclicGraph.png)
