@@ -24,8 +24,8 @@ Contributions are welcomed.
     5. [Stacks and Queues](#stacks-and-queues)
     6. [Trees](#trees)
     7. [Graphs](#graphs)
-3. Algorithms
-    1. Recursion
+3. [Algorithms](#algorithms)
+    1. [Recursion](#recursion)
     2. Back Tracking
     3. Sorting
     4. BFS and DFS
@@ -2628,3 +2628,183 @@ Which is how Google Maps can calculate the shortest path between two locations.
 A Graph is called Cyclic Graph if there's at least one cycle on nodes is present.
 
 ![Cyclic And Acyclic Graph Diagram](./CyclicVsAcyclicGraph.png)
+
+## Algorithms
+
+A word that programmers use when they don't want to explain what they did.
+
+There are tons of algorithms out there and it's impossible to learn all of them.
+
+So In this section, we'll go through the most common algorithms that need to know
+to solve Leetcode Problems and Interview Questions.
+
+It's important for programmers to know what algorithm should they use to solve
+a given problem in the most efficient way.
+
+
+### Recursion
+
+Recursion isn't an algorithm but an approach to solving recursive problems.
+
+It is the most difficult concept for beginners to learn. But once you learn it,
+it can make solving some problems easy.
+
+#### When to use Recursion
+
+Recursion is mostly used when you can divide a problem into smaller repetive problems.
+
+Like for example if you wrote a function that prints all the files and folders in
+a directory and you want to do the same for all the folders inside that directory.
+
+You can just call the same function inside that function for all the folders.
+
+```js
+// Pesudo code
+function printFilesAndFolders(directory) {
+  for (file of filesInDirectory) {
+    print(file)
+  }
+
+  for (folder of foldersInDirectory) {
+    print(folder)
+  }
+
+  for (folder of foldersInDirectory) {
+    printFilesAndFolders(folder) // Recursion
+  }
+} 
+```
+
+#### Stack Overflow
+
+Recursion can make solving recursive problems straightforward but that have
+one caveat.
+
+Whenever a function gets called it gets pushed to Stack and eats some space.
+And we have a fixed amount of space in Stack.
+
+If a Recursive function never stops calling itself it'll cause Stack Overflow.
+In interpreted languages, you'll get an error saying you've exceeded that maximum call
+stack size.
+
+And In compiled languages, your PC will just hang and you may have to restart your computer.
+
+Since they also take space in memory the Space Complexity of a Recursive Function
+is O(n) where n is the number of recursive function calls.
+
+So you have to have the Recursive function to stop it at some point.
+
+#### Anatomy of Recursive Function
+
+Every recursive function needs to have something called a Base Case. The Base Case
+will stop the recursive function from continuing calling itself.
+
+And where the function call itself is called Recursive Case.
+
+
+#### Factorial
+
+The most commonly seen function when it comes to Recursion.
+
+In mathematics, Factorial is the product of all positive integers less than or equal to a given positive integer and denoted by that integer and an exclamation point.
+
+For example: 5! = 5 * 4 * 3 * 2 * 1
+             n! = n * n-1 * n-2 * n-3 * n-4
+
+We can write this as this: n! = n * (n-1)!
+
+There is a recursion in this equation.
+
+Let's implement this in code:
+
+```js
+function factorial(n) {
+  return n * factorial(n-1);
+}
+```
+
+This exatly looks like this equation. But there is one thing missing, the base
+case.
+
+We want it to stop when it reaches 1 or the given number is smaller than 1.
+
+Because in Factorial we only deal with positive numbers.
+
+```js
+function factorial(n) {
+  if (n < 1) { // The base case
+    return 1;
+  }
+
+  return n * factorial(n-1);
+}
+```
+The space and time complexity of this function is O(n).
+
+#### Fibonacci
+
+The Fibonacci sequence is also famous programming question for recursion.
+
+In Fibonacci sequence each number is the sum of previous two numbers.
+
+`1, 1, 2, 3, 5, 8, 13, 21, ...`
+
+Now the question is how will you find the the nth number in the Fibonacci 
+sequence?
+
+You can say the the nth number in the Fibonacci sequence is equal to
+n-1th + n-2th number in the Fibonacci sequence.
+
+```
+fib(n) = fib(n-1) + fib(n-2)
+```
+
+Here is the code:
+
+```js
+function fib(n) {
+  if (n < 2) { // Base case
+    return n;
+  }
+
+  return fib(n-1) + fib(n-2);
+}
+```
+
+The base case will take care of 0 and 1.
+
+What do you think the Big O of this is?
+
+It's actually O(n^2).
+
+Here is why:
+
+The function is calling itself twice so the number of calls doubles as we go down
+the numbers.
+
+Here is a visual representation of this function:
+
+![Fibonacci Graph](./Fibonacci.png)
+
+As we can see in the graph, we are calculating same values more than once.
+This is a really inefficient way to solve this problem.
+
+The normal iterative approach would be the best to solve this problem with
+O(n) time compexity and O(1) space complexity.
+
+```js
+function fib(n) {
+  let num1 = 0;
+  let num2 = 1;
+    
+  for (let i = 1; i <= n && n > 2; i++) {
+    let total = num1 + num2;
+    num1 = num2;
+    num2 = total;
+  }
+
+  return num2;
+}
+```
+
+#### Recursive vs Iterative approach
