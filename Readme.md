@@ -26,7 +26,7 @@ Contributions are welcomed.
     7. [Graphs](#graphs)
 3. [Algorithms](#algorithms)
     1. [Recursion](#recursion)
-    2. Back Tracking
+    2. [Back Tracking](#backtracking)
     3. Sorting
     4. BFS and DFS
     5. Dynamic Programming
@@ -2808,3 +2808,163 @@ function fib(n) {
 ```
 
 #### Recursive vs Iterative approach
+
+Anything that can be implemented Iteratively can be
+implemented iteratively (loop).
+
+So when to use recursion and when to use iteration?
+
+Use recursion when you don't have to worry about memory.
+and the recursive approach is more straightforward.
+
+Use iteration when you have to worry about memory or the
+the iterative approach is more efficient than the recursive
+approach.
+
+
+### Backtracking
+
+Backtracking is a technique based on recursion to solve a problem step by step
+and if a step is not giving the results it goes back and tries a different step 
+until it reaches the solution.
+
+### Solving sudoku using Bracktracking
+
+Given a partially filled 9×9 2D array `grid[9][9]`, the goal is to assign digits
+(from 1 to 9) to the empty cells so that every row, column, and subgrid of size 
+3×3 contains exactly one instance of the digits from 1 to 9
+
+First we need a helper function that will give us the possible numbers in a cell.
+
+```js
+function getValidNumbers(input, x, y) {
+  // Storing numbers as array of booleans
+  let validNumbers = new Array(10).fill(true);
+
+  // Check row
+  for (let xi = 0; xi < input.length; xi++) {
+    validNumbers[input[xi][y]] = false;
+  }
+
+  // Check column
+  for (let yi = 0; yi < input.length; yi++) {
+    validNumbers[input[x][yi]] = false;
+  }
+
+  // Check 3x3 grid
+  let gridX = Math.floor(x/3) * 3;
+  let gridY = Math.floor(y/3) * 3;
+
+  for (let xi = gridX; xi < gridX + 3; xi++) {
+    for (let yi = gridY; yi < gridY + 3; yi++) {
+      validNumbers[input[xi][yi]] = false;
+    }
+  }
+
+  let result = [];
+
+  for (let i = 0; i < validNumbers.length; i++) {
+    if (validNumbers[i]) {
+      result.push(i);
+    }
+  }
+
+  return result;
+}
+```
+
+Then our main solver function:
+
+```js
+function solveSudoku(input) {
+  // Loop over every cell
+  for(let x = 0; x < input.length; x++) {
+    for (let y = 0; y < input.length; y++) {
+      if (input[x][y] === 0) {
+        // First we need to know what numbers we can put in this cell
+        const validNumbers = getValidNumbers(input, x, y);
+
+        // Try with each valid numbers
+        for (let validNumber of validNumbers) {
+          input[x][y] = validNumber;
+
+          // This will show how this algorithm works step by step
+          console.log({x, y, validNumbers, validNumber});
+          console.table(input);
+
+          let res = solveSudoku(input) // This will now fill the next empty cell
+
+          if (!res) { // If the result is false then that means we need to go back
+            input[x][y] = 0;
+            continue;
+          } else {
+            return res;
+          }
+        }
+
+        // If we reached here that means we don't have any numbers to put
+        // in so we return false to indicate we need to go one step back
+        return false;
+      }
+    }
+  }
+
+  // If we reached here that means the board is finised so return the board
+  return input;
+}
+```
+
+You can try running this code with the given input:
+
+```js
+const input = [
+  [3, 0, 6, 5, 0, 8, 4, 0, 0],
+  [5, 2, 0, 0, 0, 0, 0, 0, 0],
+  [0, 8, 7, 0, 0, 0, 0, 3, 1],
+  [0, 0, 3, 0, 1, 0, 0, 8, 0],
+  [9, 0, 0, 8, 6, 3, 0, 0, 5],
+  [0, 5, 0, 0, 9, 0, 6, 0, 0],
+  [1, 3, 0, 0, 0, 0, 2, 5, 0],
+  [0, 0, 0, 0, 0, 0, 0, 7, 4],
+  [0, 0, 5, 2, 0, 6, 3, 0, 0]
+];
+```
+
+It's hard to understand what this is doing just by reading the code so I
+suggest you to watch [this video](https://www.youtube.com/watch?v=G_UYXzGuqvM)
+to understand it better.
+
+### Permutations
+
+Calculating permutaions of given collection is another great use case of
+backtracking algorithm.
+
+```js
+const input = [1,2,3]
+
+function permutations(input, results=[], progress=[], used={}) {
+  for (let num of input) { // Loop over items
+    if (!used[num]) { // If item is not used
+      used[num] = true; // Make the item as used
+      progress.push(num); // Push the item to our progress
+      permutations(input, results, progress, used); // Then move to the next index in our progress
+      used[num] = false; // After we are done with the item mark it as not used
+      progress.pop(); // And remove the number from progress too so we can add next one
+    }
+  }
+
+  // One the progress has the same length as the input
+  // That's one of our results
+  if (progress.length === input.length) {
+    results.push([...progress]);
+  }
+}
+
+let results = [];
+
+permutations(input, results);
+
+console.log(results);
+```
+Once again it's hard to explain what this is doing in text so I recommed you to
+watch [this video](https://www.youtube.com/watch?v=s7AvT7cGdSo).
