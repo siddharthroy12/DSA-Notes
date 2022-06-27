@@ -27,7 +27,9 @@ Contributions are welcomed.
 3. [Algorithms](#algorithms)
     1. [Recursion](#recursion)
     2. [Back Tracking](#backtracking)
+    3. [Two Pointers](#two-pointers)
     3. Sorting
+    4. Greedy Alorithms
     4. BFS and DFS
     5. Dynamic Programming
 5. How to solve coding problems
@@ -2968,3 +2970,32 @@ console.log(results);
 ```
 Once again it's hard to explain what this is doing in text so I recommed you to
 watch [this video](https://www.youtube.com/watch?v=s7AvT7cGdSo).
+
+### Two pointers
+
+Two pointers is really an easy and effective technique that is typically used for searching pairs in an array.
+
+Usually you have one pointer pointing at the left most side of the array and one
+pointing at the right most side of the array.
+
+And we move them towards each other.
+
+Like for example if you want to know if a string is a palindrome or not
+this technique is the best way to know that.
+
+For example `"madamimadam"` is a valid palindrome.
+
+```js
+function isPalindrome(string) {
+  let left = 0;
+  let right = string.length;
+
+  while (left < right) {
+    if (string[left] !== string[right]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
