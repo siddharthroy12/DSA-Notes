@@ -28,10 +28,10 @@ Contributions are welcomed.
     1. [Recursion](#recursion)
     2. [Back Tracking](#backtracking)
     3. [Two Pointers](#two-pointers)
-    3. Sorting
-    4. Greedy Alorithms
+    3. [Sorting](#sorting)
     4. BFS and DFS
-    5. Dynamic Programming
+    5. Greedy Alorithms
+    6. Dynamic Programming
 5. How to solve coding problems
 6. Coding Problems
 
@@ -2988,7 +2988,7 @@ For example `"madamimadam"` is a valid palindrome.
 ```js
 function isPalindrome(string) {
   let left = 0;
-  let right = string.length;
+  let right = string.length - 1;
 
   while (left < right) {
     if (string[left] !== string[right]) {
@@ -2999,3 +2999,134 @@ function isPalindrome(string) {
   return true;
 }
 ```
+
+### Sorting
+
+A Sorting Algorithm is used to rearrange a given array or list of elements according 
+to a comparison operator on the elements.
+
+There are tons of sorting algorithms and all of them have their pros and cons. So
+it's important to learn when to use them.
+
+#### Basic Sorting Alorithms
+
+Bubble Sort, Selection Sort, and Insertion Sort are very basic sorting algorithms.
+They are easy to implement but have the worst time complexity so they are only used
+to introduce beginners to sorting algorithms.
+
+#### Bubble Sort
+
+Bubble sort is a very basic sorting algorithm. It's usually used as a learning
+tool to teach about sorting algorithms instead of using it in a real case.
+Because it is very slow.
+
+![Bubble Sort Animation](./BubbleSort.gif)
+
+In Bubble sort, you check two elements at a time and swap the values in sorted
+order and move forward and repeat.
+
+You need to loop over the same array multiple times until all the values are in sorted order.
+
+This is called bubble sort because we are bubbling the higher values to the right side
+and lower values to the left side.
+
+The Time Complexity of this algorithm is O(n*n) or O(n^2).
+
+The code:
+
+```js
+function bubbleSort(list) {
+  for (let i = 0; i < list.length; i++) {
+    for (let j = 0; j < list.length; j++) {
+      // If left side is bigger than right side
+      if (list[j] > list[j+1]) {
+        // Swap
+        let temp = list[j];
+        list[j] = list[j+1];
+        list[j+1] = temp;
+      }
+    }
+  }
+
+  return list;
+}
+```
+
+#### Selection Sort
+
+Selection sort works but looking for the smallest element in the list and swapping it with the left-most side in the list.
+
+![Selection Sort Animation](./SelectionSort.webp)
+
+This algorithm also takes O(n^2) time.
+
+The code:
+
+```js
+function selectionSort(list) {
+  for (let i = 0; i < list.length; i++) {
+    let smallest = list[i];
+    let smallestIndex = i;
+    
+    for (let j = i+1; j < list.length; j++) {
+      if (list[j] < smallest) {
+        smallest = list[j];
+        smallestIndex = j
+      }  
+    }
+
+    // Swap
+    let temp = list[i];
+    list[i] = smallest;
+    list[smallestIndex] = temp;
+  }
+
+  return list;
+}
+```
+
+#### Insertion Sort
+
+Insertion sort is like Bubble sort and Selection sort. Not very fast but there are
+cases where it can outperform these two with the time complexity of O(n).
+
+This happens when the list is almost sorted.
+
+And this is how it works:
+
+![Insertion Sort Animation](./InsertionSort.gif)
+
+The code:
+
+```js
+function insertionSort(list) {
+  for (let i = 0; i < list.length; i++) {
+    // If the current number we are looking at is smaller than first element
+    // Move the first element to right and place the smaller element
+    // in place of first element
+    if (list[0] > list[i]) {
+      // First remvoe the current element from the list
+      const elementWeRemoved = list.splice(i,1)[0]; // [0] to get the element we removed
+      // Place it in front of the list
+      list.unshift(elementWeRemoved);
+    } else {
+      // If the element we are looking at is not smaller than first element
+      // Then we need to figure out where we should put it but finding the
+      // Bigger element from the left side
+      for (let j = 1; j < i; j++) {
+        if (list[i] >= list[j-1] && list[i] < list[j]) {
+          // Remvoe the current element from the list
+          const elementWeRemoved = list.splice(i,1)[0];
+          // Place it where it belongs
+          list.splice(j, 0, elementWeRemoved);
+        }
+      }
+
+    }
+  }
+  return list
+}
+```
+
+The best-case scenario for Insertion sort is a small list or nearly sorted list.
+The time complexity for the best case is O(n).
