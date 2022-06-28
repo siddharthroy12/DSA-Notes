@@ -3209,3 +3209,28 @@ function merge(left, right) {
   return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
 ```
+
+#### Quick Sort
+
+Quick sort sounds like it's the quickest sorting algorith but it is as fast as merge sort but
+uses a different techinique than merge sort.
+
+Explaining Quick sort in text is impossible so I recommend you to watch
+[this video](https://www.youtube.com/watch?v=XE4VP_8Y0BU).
+
+#### Which sort to use?
+
+You will never use Bubble sort and Selection sort in a real software. They are only used for
+teaching sorting.
+
+Use Insertion sort when you have a small list or a almost sorted list.
+
+Merge Sort weather it's the best case or the worst case will only takes O(n log n) time. But
+it takes O(n) space.
+
+Quick Sort in the best case takes O(n log n) time and in the worst case takes (n^2) time. But
+it takes O(n log n) space.
+
+So use Merge Sort when you are worried about the worst case and you have plenty of memory.
+
+And use Quick sort when you don't have to worry about worst case or have less memory.
