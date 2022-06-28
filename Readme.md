@@ -3223,14 +3223,14 @@ Explaining Quick sort in text is impossible so I recommend you to watch
 You will never use Bubble sort and Selection sort in a real software. They are only used for
 teaching sorting.
 
-Use Insertion sort when you have a small list or a almost sorted list.
+Use Insertion sort when you have a small list or an almost sorted list.
 
-Merge Sort weather it's the best case or the worst case will only takes O(n log n) time. But
+Merge Sort whether it's the best case or the worst case will only take O(n log n) time. But
 it takes O(n) space.
 
 Quick Sort in the best case takes O(n log n) time and in the worst case takes (n^2) time. But
 it takes O(n log n) space.
 
-So use Merge Sort when you are worried about the worst case and you have plenty of memory.
+So use Merge Sort when you are worried about the worst-case and you have plenty of memory.
 
-And use Quick sort when you don't have to worry about worst case or have less memory.
+And use Quick sort when you don't have to worry about the worst-case or have less memory.
