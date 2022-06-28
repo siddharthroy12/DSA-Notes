@@ -33,6 +33,7 @@ Contributions are welcomed.
     5. Greedy Alorithms
     6. Dynamic Programming
 5. How to solve coding problems
+6. Important Topics
 6. Coding Problems
 
 ## Big O
@@ -2197,13 +2198,18 @@ Red Black Tree: https://medium.com/basecs/painting-nodes-black-with-red-black-tr
 
 #### Heap and Binary Heap
 
-A Heap is a special Tree-based data structure in which the tree is a complete binary tree. And it may sound fimiliar but it is not related to Heap memory.
+A Heap is a special Tree-based data structure in which the tree is a complete binary tree.
+And it may sound fimiliar but it is not related to Heap memory.
 
 Generally, Heaps can be of two types:
 
-**Max-Heap**: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it's children. The same property must be recursively true for all sub-trees in that Binary Tree.
+**Max-Heap**: In a Max-Heap the key present at the root node must be greatest among the keys
+present at all of it's children. The same property must be recursively
+true for all sub-trees in that Binary Tree.
 
-**Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it's children. The same property must be recursively true for all sub-trees in that Binary Tree.
+**Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the
+keys present at all of it's children. The same property must be recursively true
+for all sub-trees in that Binary Tree.
 
 Heap is also called Binary Heap, there are the same thing.
 
@@ -2228,7 +2234,8 @@ element. I'll be either Pushing, Popping, or Reading the first Element all of th
 #### Why use Binary Heap
 
 Binary Heap is usefull if you want to have a list of items that
-stays sorted when you delete or insert an item. So it's useful when you want to get the data with either the highest priorty(Max Heap) or the lowest priorty(Min Heap).
+stays sorted when you delete or insert an item. So it's useful when you
+want to get the data with either the highest priorty(Max Heap) or the lowest priorty(Min Heap).
 
 #### Implementing Binary Heap
 
@@ -3234,3 +3241,89 @@ it takes O(n log n) space.
 So use Merge Sort when you are worried about the worst-case and you have plenty of memory.
 
 And use Quick sort when you don't have to worry about the worst-case or have less memory.
+
+#### Heap Sort
+
+Heapsort is basically using the [Heap](#heap-and-binary-heap) data structure to sort an array. The convertion from array to heap
+takes O(n log n) time.
+
+This sorting algorithm is only used when we need to get the lowest or highest value in a list.
+
+#### Radix Sort and Counting Sort
+
+Mathematically it's impossible to beat O(n log n) time when it's come to sorting. Because we have
+to compare every element with each other.
+
+Radix Sort and Counting Sort beat the O(n log n) time by not comparing elements
+with each other.
+
+Both of them take advantage of how data is sorted and they only work with numbers.
+
+#### Counting Sort
+
+We only use this when the range of values (biggest number - smallest number + 1) is smaller or equal to the length
+of the input array.
+
+The Big O of this is O(n + k) where n is the length of input and k is the
+range of numbers.
+
+For example for this one the n is 7 and the k is 6:
+
+```js
+const list = [6,4,6,2,4,7,1]
+```
+
+The algorithm of Counting sort goes like this:
+
+Loop through the entire list and keep track of the frequencies of the numbers in a HashSet or an array.
+Now loop over the range and check which number was present and how many times and put them new a new array.
+
+The code:
+
+```js
+function countingSort(list) {
+  const seen = {};
+  const res = [];
+  let highest = list[0];
+  let lowest = list[0];
+
+  for (num of list) {
+    if (num > highest) {
+      highest = num;
+    }
+
+    if (num < lowest) {
+      lowest = num;
+    }
+
+    if (!(num in seen)) {
+      seen[num] = 1;
+    } else {
+      seen[num]++;
+    }
+  }
+
+  // This takes O(n) time even through there is a nested loop
+  for (let i = lowest; i <= highest; i++) {
+    if (i in seen) {
+      for (let j = 0; j < seen[i]; j++) {
+        res.push(i);
+      }
+    }
+  }
+
+  return res;
+}
+```
+
+#### Radix Sort
+
+Radix Sort is hard to explain for me so
+I recommend you to read [this article](https://www.doabledanny.com/radix-sort-in-javascript).
+
+You can skip this one becuase it's now that important to know.
+
+#### Bucket Sort
+
+This is also not important so
+I'll just point to [another article](https://www.programiz.com/dsa/bucket-sort) for this.
