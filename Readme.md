@@ -2119,7 +2119,9 @@ insert(value) {
 First we check if the root node is null if it's null then the tree is empty
 So we put the new Node at the root.
 
-Then we traverse through the tree at each node we are checking which way to go(bigger value is to right and smaller value is to left) and if the next node is empty put the new node there else move to that node.
+Then we traverse through the tree at each node we are checking which way
+to go(bigger value is to right and smaller value is to left) and if the next
+node is empty put the new node there else move to that node.
 
 
 You can test this out by running this
@@ -3000,6 +3002,32 @@ function isPalindrome(string) {
 }
 ```
 
+#### Divide and Conquer
+
+Divide and Conquer algorithm is a strategy of solving a large problem by recursively dividing the problem into sub-problems and solving them until we get
+to the solution.
+
+The best example of this is searching for a item in a sorted list.
+
+```js
+const list = [1,3,6,7,9,15,20];
+```
+
+If we want to find an item in a sorted array we can start from the middle and
+check if the middle one is smaller or greater or equal to the target.
+
+Because the array is sorted we know that the target could be in either the left
+side if the middle is bigger or the right side if middle is smaller.
+
+Then go to the next middle (either of left side or right side).
+
+Continue doing this until you reach the target.
+
+![Binary Search](BinarySearch.png)
+
+The is called binary search and the Big O of this
+is O(log n).
+
 ### Sorting
 
 A Sorting Algorithm is used to rearrange a given array or list of elements according 
@@ -3054,7 +3082,8 @@ function bubbleSort(list) {
 
 #### Selection Sort
 
-Selection sort works but looking for the smallest element in the list and swapping it with the left-most side in the list.
+Selection sort works but looking for the smallest element in the
+list and swapping it with the left-most side in the list.
 
 ![Selection Sort Animation](./SelectionSort.webp)
 
@@ -3130,3 +3159,53 @@ function insertionSort(list) {
 
 The best-case scenario for Insertion sort is a small list or nearly sorted list.
 The time complexity for the best case is O(n).
+
+#### Merge Sort
+
+Mergo Sort is a sorting algorithm that use actually use in softwares unlike the previous ones.
+And the time complexity of Merge Sort is O(n log n) because this uses Divide anc Conquer method.
+
+In the first stage we divide the list of items into halfs recursively until we have one item.
+Then in the second stage we put them back together but in a sorted order.
+
+![Merge Sort Diagram](./MergeSort.png)
+
+To implement this we need to write two functions one will divide the list recursively and
+the other will merge them in sorted order.
+
+```js
+function mergeSort(list) {
+  if (list.length === 1) {
+    return list;
+  }
+
+  const middle = Math.floor(list.length / 2);
+
+  const left = list.splice(0, middle);
+  const right = list.splice(middle);
+
+  return merge(
+    mergeSort(left),
+    mergeSort(right)
+  );
+}
+
+function merge(left, right) {
+  const result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      left++;
+    } else {
+      result.push(right[rightIndex]);
+      right++;
+    }
+  }
+
+  // Put the remaining elements in the result
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
+```
