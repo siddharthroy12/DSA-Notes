@@ -30,8 +30,9 @@ Contributions are welcomed.
     3. [Two Pointers](#two-pointers)
     3. [Sorting](#sorting)
     4. BFS and DFS
-    5. Greedy Alorithms
     6. Dynamic Programming
+    5. Greedy Alorithms
+    6. Intervals
 5. How to solve coding problems
 6. Important Topics
 6. Coding Problems
