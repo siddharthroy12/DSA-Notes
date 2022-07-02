@@ -31,7 +31,7 @@ Contributions are welcomed.
     4. [Divide and Conquer](#divide-and-conquer)
     5. [Sorting](#sorting)
     6. [Searching](#searching)
-    7. BFS and DFS
+    7. [BFS and DFS](#bfs-and-dfs)
     8. Dynamic Programming
     9. Greedy Alorithms
     10. Intervals
@@ -3399,3 +3399,62 @@ function binarySearch(list, value) {
 ```
 
 The time complexity of Binary Search is O(log n).
+
+### BFS and DFS
+
+If we have a unsorted Tree or a Graph we have go over every item in the data-structure
+to find an item.
+
+We have two method for searching in these two data-strucutre:
+- Breadth First Search
+- Depth First Search
+
+Both have the same time complexity in the worst case. It's O(n).
+But they have their pros and cons.
+
+#### Breadth First Search
+
+The way BFS works is we first check the first level (the root node) then
+then each element of second level then each element of third level and so on.
+
+It looks like this:
+
+![BFS Animation](./BFS.gif)
+
+#### Depth First Search
+
+In DFS we explore the depth of the child node first then move to
+the next child node.
+
+It looks like this:
+
+![DFS Animation](./DFS.gif)
+
+#### BFS vs DFS
+
+**Data structure**:
+
+BFS uses Queue to find the shortest path.
+
+DFS uses Stack to find the shortest path.
+
+**Faviourable Condition**:
+
+BFS is better when target is closer to Source.
+
+DFS is better when target is far from source.
+
+**Space Complexity**:
+
+In case of Balanced Binary Trees BFS takes more memory than DFS
+because the Big O of BFS is O(w) where w is the width of the tree and
+the Big O of DFS is O(h) where h is the height of the tree.
+
+**Pros**:
+
+BFS is good at finding the shortest path from the source.
+
+DFS is used when we want to know if the target exist and it usually takes
+less memory.
+
+To learn more about their space and time complexity read [this](https://stackoverflow.com/questions/9844193/what-is-the-time-and-space-complexity-of-a-breadth-first-and-depth-first-tree-tr)
