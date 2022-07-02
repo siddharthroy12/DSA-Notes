@@ -28,11 +28,13 @@ Contributions are welcomed.
     1. [Recursion](#recursion)
     2. [Back Tracking](#backtracking)
     3. [Two Pointers](#two-pointers)
-    3. [Sorting](#sorting)
-    4. BFS and DFS
-    6. Dynamic Programming
-    5. Greedy Alorithms
-    6. Intervals
+    4. [Divide and Conquer](#divide-and-conquer)
+    5. [Sorting](#sorting)
+    6. [Searching](#searching)
+    7. BFS and DFS
+    8. Dynamic Programming
+    9. Greedy Alorithms
+    10. Intervals
 5. How to solve coding problems
 6. Important Topics
 6. Coding Problems
@@ -3010,7 +3012,7 @@ function isPalindrome(string) {
 }
 ```
 
-#### Divide and Conquer
+### Divide and Conquer
 
 Divide and Conquer algorithm is a strategy of solving a large problem by recursively dividing the problem into sub-problems and solving them until we get
 to the solution.
@@ -3328,3 +3330,72 @@ You can skip this one becuase it's now that important to know.
 
 This is also not important so
 I'll just point to [another article](https://www.programiz.com/dsa/bucket-sort) for this.
+
+### Searching
+
+#### Linear Search
+
+Linear Search is a method of finding a value by checking each item sequentially
+in a data structure.
+
+It's the most basic way to search and the time complexity of this is O(n).
+
+One example of this is getting the index of a value in an array. 
+
+```js
+function getIndex(list, value) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] === value) {
+      return i;
+    }
+  }
+
+  return -1; // If value not found
+}
+```
+
+Linear Search is the slowest way to seach for an item so always avoid using this
+if we have a large amount of data.
+
+But for a small list this is not a bad method.
+
+### Binary Search
+
+We can use Binary Seach when the data is in sorted order,
+it can be an array or a [Binary Tree](#binary-tree).
+
+For example if we have an array `[1,3,6,7,9,15,20,21,25,26,29,30]` and
+we want the index of `9` we can first check the middle value.
+
+If the middle value is bigger than our target then go the the middle from
+left side.
+
+If the middle from left side is smaller then go to the next middle until you
+get to the target.
+
+![Binary Search](BinarySearch.png)
+
+The code:
+
+```js
+function binarySearch(list, value) {
+  let begin = 0;
+  let end = list.length - 1;
+
+  while (begin <= end) {
+    mid = Math.ceil((begin + end)/2);
+
+    if (list[mid] > value) {
+      end = mid - 1;
+    } else if (list[mid] < value) {
+      begin = mid + 1;
+    } else {
+      return mid;
+    }
+  }
+
+  return -1;
+}
+```
+
+The time complexity of Binary Search is O(log n).
