@@ -33,8 +33,6 @@ Contributions are welcomed.
     6. [Searching](#searching)
     7. [BFS and DFS](#bfs-and-dfs)
     8. Dynamic Programming
-    9. Greedy Alorithms
-    10. Intervals
 5. How to solve coding problems
 6. Important Topics
 6. Coding Problems
@@ -3458,3 +3456,394 @@ DFS is used when we want to know if the target exist and it usually takes
 less memory.
 
 To learn more about their space and time complexity read [this](https://stackoverflow.com/questions/9844193/what-is-the-time-and-space-complexity-of-a-breadth-first-and-depth-first-tree-tr)
+
+#### When to use what?
+
+**BFS**:
+
+If the target is not far from the source.
+
+If the tree is deep than wide.
+
+Determining the shortest path from the source to the target.
+
+**DFS**:
+
+If the target is far from the source.
+
+If the tree is wide than deep.
+
+Determining if the target exists.
+
+#### Implementing BFS
+
+Assuming the node structure look like this:
+
+```ts
+Node {
+  value: Number,
+  childrens: [Node]
+}
+```
+
+```js
+function breadthFirstSearch(root, target) {
+  let currentNodes = [root]; // Store all the nodes of current level
+
+  while (currentNodes.length > 0) { // While we have nodes in current level
+    let nextNodes = []; // Store the nodes in next level
+    
+    for (let node of currentNodes) { // Look in each node at current level
+      if (node.value === target) { // If It's the target then return the node
+        return node;
+      } else { // If it's not the target then push it's childrens to next level
+        for (let child of node.childrens) {
+          nextNodes.push(child);
+        }
+      }
+    }
+
+    currentNodes = nextNodes; // Move to next level
+  }
+
+  return null;
+}
+```
+
+You can test this code on this tree:
+
+```js
+//        5
+//      / | \
+//     6  7  8
+//    /| /\  |\
+//   1 2 3 9 4 10 
+
+const testTree = {
+  value: 5,
+  childrens: [
+    {
+      value: 6,
+      childrens: [
+        {
+          value: 1,
+          childrens: []
+        },
+        {
+          value: 2,
+          childrens: []
+        }
+      ],
+    },
+    {
+      value: 7,
+      childrens: [
+        {
+          value: 3,
+          childrens: []
+        },
+        {
+          value: 9,
+          childrens: []
+        }
+      ]
+    },
+    {
+      value: 8,
+      childrens: [
+        {
+          value: 4,
+          childrens: []
+        },
+        {
+          value: 10,
+          childrens: []
+        }
+      ]
+    }
+  ]
+}
+
+console.log(breadthFirstSearch(testTree, 3)); // Returns the node with 3 value
+console.log(breadthFirstSearch(testTree, 11)); // Returns null
+```
+
+We can see how the BFS function traversing through the tree by converting
+it to an array.
+
+```js
+function breadthFirstTraverse(root) {
+  let currentNodes = [root];
+  let res = [];
+
+  while (currentNodes.length > 0) {
+    let nextNodes = [];
+
+    for (let node of currentNodes) {
+      res.push(node.value);
+
+      for (let child of node.childrens) {
+        nextNodes.push(child);
+      }
+    }
+
+    currentNodes = nextNodes;
+  }
+
+  return res;
+}
+```
+
+Try running this code for that test tree you should see this:
+
+```js
+[5, 6, 7, 8, 1, 2, 3, 9, 4, 10]
+```
+
+#### Implementing DFS
+
+There are three ways to implement BFS. PreOrder, InOrder, and PostOrder.
+
+There are the three ways traverse through the tree and it looks like this:
+
+```js
+//         5
+//       / | \
+//      6  7  8
+//     /| |\  |\
+//    1 2 3 9 4 10
+
+InOrder = [1,6,2,5,3,7,9,4,8,10]
+PreOrder = [5,6,1,2,7,3,9,8,4,10]
+PostOrder = [1,2,6,3,9,7,4,10,8,5]
+```
+
+**InOrder**:
+
+InOrder is used to get the values of the nodes in non-decreasing order in a [BST](#binary-search-tree).
+
+InOrder is only used in Binary Trees.
+
+So we'll use a Binary Tree Node for this:
+
+```ts
+Node {
+  value: Number,
+  left: Node
+  right: Node
+}
+```
+
+```js
+function DFSInOrder(source) {
+  if (!source) {
+    return [];
+  }
+
+  let res = [];
+
+  const left = DFSInOrder(source.left);
+
+  for (let value of left) {
+    res.push(value);
+  }
+
+  res.push(source.value);
+
+  const right = DFSInOrder(source.right);
+
+  for (let value of right) {
+    res.push(value)
+  }
+
+  return res;
+}
+```
+
+Try running it with this Binary Tree.
+
+```js
+//         10
+//        /  \
+//       5   12
+//      /\   |\
+//     3  7 11 13
+//    /| |\
+//   1 4 6 8
+
+const testBinaryTree = {
+  value: 10,
+  left: {
+    value: 5,
+    left: {
+      value: 3,
+      left: {
+        value: 1,
+        left: null,
+        right: null
+      },
+      right: {
+        value: 4,
+        left: null,
+        right: null
+      }
+    },
+    right: {
+      value: 7,
+      left: {
+        value: 6,
+        left: null,
+        right: null,
+      },
+      right: {
+        value: 8,
+        left: null,
+        right: null
+      }
+    }
+  },
+  right: {
+    value: 12,
+    left: {
+      value: 11,
+      left: null,
+      right: null
+    },
+    right: {
+      value: 13,
+      left: null,
+      right: null
+    }
+  }
+}
+```
+
+It should give this result:
+
+```js
+[1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13]
+```
+
+**PreOrder**:
+
+Used to create a copy of a tree. For example, if you want to create a replica
+of a tree, put the nodes in an array with a pre-order traversal.
+
+Then perform an Insert operation on a new tree for each value in the array.
+You will end up with a copy of your original tree.
+
+Since we can use any type of tree or graph I'll use a
+generic node.
+
+```ts
+Node {
+  value: Number,
+  childrens: [Node]
+}
+```
+
+```js
+function DFSPreOrder(source) {
+  if (!source) {
+    return [];
+  }
+
+  let res = [source.value];
+
+  for (let child of source.childrens) {
+    const next = DFSPreOrder(child);
+
+    for (let value of next) {
+      res.push(value);
+    }
+  }
+
+  return res;
+}
+```
+
+Example Tree:
+
+```js
+//        5
+//      / | \
+//     6  7  8
+//    /| /\  |\
+//   1 2 3 9 4 10 
+
+const testTree = {
+  value: 5,
+  childrens: [
+    {
+      value: 6,
+      childrens: [
+        {
+          value: 1,
+          childrens: []
+        },
+        {
+          value: 2,
+          childrens: []
+        }
+      ],
+    },
+    {
+      value: 7,
+      childrens: [
+        {
+          value: 3,
+          childrens: []
+        },
+        {
+          value: 9,
+          childrens: []
+        }
+      ]
+    },
+    {
+      value: 8,
+      childrens: [
+        {
+          value: 4,
+          childrens: []
+        },
+        {
+          value: 10,
+          childrens: []
+        }
+      ]
+    }
+  ]
+}
+```
+
+Result: `[5, 6, 1, 2, 7, 3, 9, 8, 4, 10]`
+
+**PostOrder**:
+
+Used to delete a tree from leaf to root.
+
+```js
+function DFSPostOrder(source) {
+  if (!source) {
+    return [];
+  }
+
+  let res = [];
+
+  for (let child of source.childrens) {
+    const next = DFSPostOrder(child);
+
+    for (let value of next) {
+      res.push(value);
+    }
+  }
+
+  res.push(source.value);
+
+  return res;
+}
+```
+
+Run this code with the example tree of previous one
+and you should get this result: `[1, 2,  6, 3, 9, 7, 4, 10, 8, 5]`
