@@ -31,9 +31,8 @@ Contributions are welcomed.
     6. [Searching](#searching)
     7. [BFS and DFS](#bfs-and-dfs)
     8. [Dynamic Programming](#dynamic-programming)
-5. How to solve coding problems
-6. Additional Important Topics
-6. Coding Problems
+6. [Additional Important Topics](#additional-important-topics)
+6. [Coding Problems](#coding-problems)
 
 ## Big O
 
@@ -44,7 +43,7 @@ It indicates how much time and memory an algorithm
 will take to solve a problem for a given input.
 
 Because a code can run faster or slower on different processors
-it's not a good way to calculate the efficiency of a program.
+calculating time not a good way to calculate the efficiency of a program.
 
 That's why we use Big O notation to show how well a code performs
 when the input grows.
@@ -3974,3 +3973,15 @@ of that was O(n^2).
 
 With memoization, we are solving every sub-problem once so the Time Complexity
 becomes O(n) which is a huge improvement.
+
+## Additional Important Topics
+
+- Sliding Window
+- Greedy Alogorithms
+- Intervals
+
+## Coding Problems
+
+Start here if new -> [neetcode.io](neetcode.io)
+
+To prepare for interview at top tech -> [Grind75](https://www.techinterviewhandbook.org/grind75)
