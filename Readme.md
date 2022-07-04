@@ -3,8 +3,6 @@
 I'm making my detailed notes here as I'm learning DSA.
 This can be useful to you even if you don't have any knowledge of DSA.
 
-> **Warning:** This is in work in process
-
 If you find something that I have written wrong or It could be explained in a better
 way please submit an issue [here](https://github.com/siddharthroy12/My-DSA-Notes/issues).
 
@@ -32,9 +30,9 @@ Contributions are welcomed.
     5. [Sorting](#sorting)
     6. [Searching](#searching)
     7. [BFS and DFS](#bfs-and-dfs)
-    8. Dynamic Programming
+    8. [Dynamic Programming](#dynamic-programming)
 5. How to solve coding problems
-6. Important Topics
+6. Additional Important Topics
 6. Coding Problems
 
 ## Big O
@@ -3847,3 +3845,132 @@ function DFSPostOrder(source) {
 
 Run this code with the example tree of previous one
 and you should get this result: `[1, 2,  6, 3, 9, 7, 4, 10, 8, 5]`
+
+### Dynamic Programming
+
+Dynamic Programming is a technique that is used when you have
+a problem that can be divided into smaller sub-problems and then the
+solutions to these subproblems are cached in case the sub-problems repeat.
+
+#### Memoization
+
+Caching or Memoization is a big part of Dynamic Programming.
+
+Memoization is an act of caching the result of a function so that
+if the function is computationally expensive and that function will
+get called multiple times with the same input it can return the result immediately.
+
+Here is a simple function that takes an input and returns the log 
+of the input number.
+
+```js
+function getLog(n) {
+  return Math.log(n);
+}
+```
+
+Log is an expensive function but not that much to slow down a modern
+computer.
+
+If we want to calculate the log of all numbers in a list and that list is big
+and also have lots of duplicates, we can use memoization to speed up the
+calculation.
+
+```js
+const cache = {};
+
+function getLog(n) {
+  if (!cache[n]) {
+    cache[n] = Math.log(n);
+  }
+
+  return cache[n];
+}
+```
+
+Now even if one number is used multiple times the calculation will only run
+one time.
+
+We can improve this code a little more. Since most people hate using global
+variables, we should move this cache variable to a scope.
+
+```js
+const getLog = (() => {
+  const cache = {};
+
+  return (n) => {
+    if (!cache[n]) {
+      cache[n] = Math.log(n);
+    }
+
+    return cache[n];
+  }
+})();
+```
+
+Using the closure feature of JavaScript now we have the cache variable scoped.
+And the function behaves the same.
+
+#### Fibonacci Sequence
+
+Fibonacci Sequence is an ideal example to solve using Dynamic Programming
+
+In a Fibonacci Sequence, every number is equal to the sum of the previous two
+numbers
+
+```
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34 . . .
+```
+Now we will take a function fib(n) that returns the nth number of the Fibonacci series. We can come up with a recursive formula for this:
+
+```
+fib(n) = fib(n-1) + fib(n-2)
+```
+
+As you can see we have divided a problem into two sub-problems. Now let's
+write the code for it.
+
+```js
+function fib(n) {
+  if (n < 2) {
+    return n;
+  }
+
+  return fib(n-1)+fib(n-2);
+}
+```
+
+It was so easy to implement but we have one problem here.
+
+![Fibonacci Visual](Fib.png)
+
+In this visualization, you can see that we are solving some same problems
+twice so we need to add memoization to it.
+
+```js
+const cache = {}
+
+function fib(n) {
+  if (cache[n]) {
+    return cache[n];
+  }
+
+  let res;
+
+  if (n < 2) {
+    res = n;
+  } else {
+    res = fib(n-1)+fib(n-2)
+  }
+
+  cache[n] = res;
+
+  return res;
+}
+```
+
+Without cache, we were solving some sub-problems twice so the Time Complexity
+of that was O(n^2).
+
+With memoization, we are solving every sub-problem once so the Time Complexity
+becomes O(n) which is a huge improvement.
